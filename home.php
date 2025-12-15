@@ -1,4 +1,5 @@
-<?php include "db_connect.php"; ?> <div class="container-fluid py-2">
+<?php include "db_connect.php"; ?>
+<div class="container-fluid py-2">
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" onclick="location.href='./index.php?page=event'">
             <div class="card">
@@ -25,14 +26,14 @@
             <div class="card" onclick="location.href='./index.php?page=list_user'">
                 <div class="card-header p-2 ps-3">
                     <div class="d-flex justify-content-between">
-                        <?php $sql = "SELECT count(*) as total_users FROM users_database"; $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalUsers = $row['total_users']; ?>
+                        <?php $sql = "SELECT count(*) as total_course FROM course_database"; $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourse = $row['total_course']; ?>
                         <div>
                             <p class="text-sm mb-0 text-capitalize">Total Courses Completed</p>
-                            <h4 class="mb-0"> <?php if($totalUsers==0){ echo "0"; }else{ echo $totalUsers; } ?> </h4>
+                            <h4 class="mb-0"> <?php if($totalCourse==0){ echo "0"; }else{ echo $totalCourse; } ?> </h4>
                         </div>
                         <div
                             class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                            <i class="material-symbols-rounded opacity-10">person</i>
+                            <i class="material-symbols-rounded opacity-10">leaderboard</i>
                         </div>
                     </div>
                 </div>
@@ -42,6 +43,35 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card" onclick="location.href='./index.php?page=event'">
+                <div class="card-header p-2 ps-3">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(name) as total_user FROM users_database"; }  
+                            else{  
+                                $sql = "SELECT count(name) as total_user FROM users_database WHERE event_organizer_id=".$_SESSION['login_user_id']; 
+                                } $result = $conn->query($sql); 
+                                $row = $result->fetch_assoc(); 
+                                $totalUsers = $row['total_user']; 
+                            ?>
+                            <p class="text-sm mb-0 text-capitalize">Total Users</p>
+                            <h4 class="mb-0"> <?php if($totalUsers==0){ echo "0"; }else{ echo $totalUsers; } ?> </h4>
+                        </div>
+                        <div
+                            class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                            <i class="material-symbols-rounded opacity-10">person</i>
+
+                        </div>
+                    </div>
+                </div>
+                <hr class="dark horizontal my-0">
+                <div class="card-footer p-2 ps-3">
+                    <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+5% </span>than yesterday</p>
+                </div>
+            </div>
+        </div>
+
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card" onclick="location.href='./index.php?page=event'">
                 <div class="card-header p-2 ps-3">
@@ -59,7 +89,8 @@
                         </div>
                         <div
                             class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                            <i class="material-symbols-rounded opacity-10">leaderboard</i>
+                            <i class="material-symbols-rounded opacity-10">weekend</i>
+
                         </div>
                     </div>
                 </div>
@@ -69,27 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-sm-6">
-            <div class="card" onclick="location.href='./index.php?page=event'">
-                <div class="card-header p-2 ps-3">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(name) as total_user FROM users_database"; } // else{ // $sql = "SELECT count(name) as total_user FROM users_database WHERE event_organizer_id=".$_SESSION['login_user_id']; // } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalUsers = $row['total_user']; ?>
-                            <p class="text-sm mb-0 text-capitalize">Total Users</p>
-                            <h4 class="mb-0"> <?php if($totalUsers==0){ echo "0"; }else{ echo $totalUsers; } ?> </h4>
-                        </div>
-                        <div
-                            class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                            <i class="material-symbols-rounded opacity-10">weekend</i>
-                        </div>
-                    </div>
-                </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-2 ps-3">
-                    <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+5% </span>than yesterday</p>
-                </div>
-            </div>
-        </div>
+
     </div>
     <div class="row mb-4 mt-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
@@ -99,7 +110,16 @@
                         <div class="col-lg-6 col-7">
                             <h6>Courses</h6>
                             <p class="text-sm mb-0">
-                                <?php if ($_SESSION['login_user_type'] == 1) { $sql = "SELECT COUNT(*) AS total_course FROM course_database"; } else { $sql = "SELECT COUNT(*) AS total_course FROM course_database WHERE course_owner = " . $_SESSION['login_user_id']; } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourses = $row['total_course']; ?>
+                                <?php if ($_SESSION['login_user_type'] == 1) { 
+                                    $sql = "SELECT COUNT(*) AS total_course FROM course_database"; 
+                                    } 
+                                    else { 
+                                        $sql = "SELECT COUNT(*) AS total_course FROM course_database WHERE course_owner = " . $_SESSION['login_user_id']; 
+                                    } 
+                                    $result = $conn->query($sql); 
+                                    $row = $result->fetch_assoc(); 
+                                    $totalCourses = $row['total_course']; 
+                                ?>
                                 <i class="fa fa-check text-info"></i> <span class="font-weight-bold ms-1">
                                     <?php echo $totalCourses; ?> Registered </span> till now
                             </p>
@@ -125,12 +145,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($_SESSION['login_user_type'] == 1) { $qry = $conn->query(" SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name FROM course_database cd JOIN course_type ct ON cd.course_type = ct.course_type_id JOIN users_database u ON cd.course_owner = u.user_id "); } else { $qry = $conn->query(" SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name FROM course_database cd JOIN course_type ct ON cd.course_type = ct.course_type_id JOIN users_database u ON cd.course_owner = u.user_id WHERE cd.course_owner = " . $_SESSION['login_user_id'] ); } while ($row = $qry->fetch_assoc()): ?>
+                                <?php 
+                                    if ($_SESSION['login_user_type'] == 1) { 
+                                        $qry = $conn->query(" SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name FROM course_database cd JOIN course_type ct ON cd.course_type = ct.course_type_id JOIN users_database u ON cd.course_owner = u.user_id "); 
+                                    } 
+                                    else { 
+                                        $qry = $conn->query(" SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name FROM course_database cd JOIN course_type ct ON cd.course_type = ct.course_type_id JOIN users_database u ON cd.course_owner = u.user_id WHERE cd.course_owner = " . $_SESSION['login_user_id'] ); 
+                                    } 
+                                        while ($row = $qry->fetch_assoc()): 
+                                ?>
                                 <tr>
                                     <!-- ID -->
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            <h6 class="mb-0 text-sm"> 
+                                            <h6 class="mb-0 text-sm">
 
                                                 <?php
                                                     $num = $row['course_id'];

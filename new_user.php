@@ -21,10 +21,9 @@
                                 <select name="category" id="category" class="form-control form-control-sm border border-dark rounded" required>
                                 <?php if($_SESSION['login_user_type'] == 1): ?>
                                     <option value="1">Admin</option>
-                                    <option value="2">Organizer</option>
+                                    <option value="2">Course Owner</option>
                                 <?php endif; ?>
-                                    <option value="3" selected>Client</option>
-                                    <option value="4">Attendee</option>
+                                    <option value="3" selected>Student</option>
                                 </select>
                             </div>
                         </div>

@@ -10,13 +10,10 @@
             <span class="ms-1 text-sm text-dark">ADMIN</span>
             <?php endif;?>
             <?php if($_SESSION['login_user_type'] == 2): ?>
-            <span class="ms-1 text-sm text-dark">STUDENT</span>
+            <span class="ms-1 text-sm text-dark">COURSE OWNER</span>
             <?php endif;?>
             <?php if($_SESSION['login_user_type'] == 3): ?>
-            <span class="ms-1 text-sm text-dark">CLIENT</span>
-            <?php endif;?>
-            <?php if($_SESSION['login_user_type'] == 4): ?>
-            <span class="ms-1 text-sm text-dark">ATTENDEE</span>
+            <span class="ms-1 text-sm text-dark">STUDENT</span>
             <?php endif;?>
         </a>
     </div>
@@ -38,9 +35,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=event">
+                <a class="nav-link text-dark" href="./index.php?page=course">
                     <i class="material-symbols-rounded opacity-5">table_view</i>
-                    <span class="nav-link-text ms-1">Events</span>
+                    <span class="nav-link-text ms-1">Courses</span>
                 </a>
             </li>
             <?php endif;?>
@@ -52,9 +49,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=event">
+                <a class="nav-link text-dark" href="./index.php?page=course">
                     <i class="material-symbols-rounded opacity-5">table_view</i>
-                    <span class="nav-link-text ms-1">Events</span>
+                    <span class="nav-link-text ms-1">Courses</span>
                 </a>
             </li>
             <?php endif;?>
@@ -66,9 +63,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=new_event">
+                <a class="nav-link text-dark" href="./index.php?page=new_course">
                     <i class="material-symbols-rounded opacity-5">format_textdirection_r_to_l</i>
-                    <span class="nav-link-text ms-1">Add Event</span>
+                    <span class="nav-link-text ms-1">Add Course</span>
                 </a>
             </li>
             <li class="nav-item">

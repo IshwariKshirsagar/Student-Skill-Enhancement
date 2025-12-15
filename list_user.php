@@ -44,7 +44,7 @@
                     <tbody>
                         <?php
                             $i = 1;
-                            $type = array('', "Admin", "Organizer", "Client", "Attendee");
+                            $type = array('', "Admin", "Course Owner", "Student");
                             if ($_SESSION['login_user_type'] == 1) {
                                 $qry = $conn->query("SELECT * FROM users_database");
                             } else if ($_SESSION['login_user_type'] == 2) {
