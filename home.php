@@ -97,17 +97,17 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col-lg-6 col-7">
-                            <h6>Events</h6>
+                            <h6>Courses</h6>
                             <p class="text-sm mb-0">
                                 <?php if ($_SESSION['login_user_type'] == 1) { $sql = "SELECT COUNT(*) AS total_course FROM course_database"; } else { $sql = "SELECT COUNT(*) AS total_course FROM course_database WHERE course_owner = " . $_SESSION['login_user_id']; } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourses = $row['total_course']; ?>
                                 <i class="fa fa-check text-info"></i> <span class="font-weight-bold ms-1">
-                                    <?php echo $totalCourses; ?> done </span> till now
+                                    <?php echo $totalCourses; ?> Registered </span> till now
                             </p>
                         </div>
                     </div>
                 </div> <?php if ($totalCourses > 0): ?> <div class="card-body px-0 pb-2">
                     <div class="table-responsive">
-                        <table id="sortableTable" class="table align-items-center mb-0" >
+                        <table id="sortableTable" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th onclick="sortTable(0)"
@@ -130,7 +130,33 @@
                                     <!-- ID -->
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                            <h6 class="mb-0 text-sm"> 00<?php echo $row['course_id']; ?> </h6>
+                                            <h6 class="mb-0 text-sm"> 
+
+                                                <?php
+                                                    $num = $row['course_id'];
+                                                    $temp = $num;
+                                                    $count = 0;
+
+                                                    /* Count digits */
+                                                    if ($temp == 0) {
+                                                        $count = 1;
+                                                    } else {
+                                                        while ($temp != 0) {
+                                                            $temp = (int)($temp / 10);
+                                                            $count++;
+                                                        }
+                                                    }
+
+                                                    /* Conditions */
+                                                    if ($count == 1) {
+                                                        echo "00" . $row['course_id'];
+                                                    } elseif ($count == 2) {
+                                                        echo "0" . $row['course_id'];
+                                                    } else {
+                                                        echo $row['course_id'];
+                                                    }
+                                                ?>
+                                            </h6>
                                         </div>
                                     </td> <!-- Course Name -->
                                     <td>
