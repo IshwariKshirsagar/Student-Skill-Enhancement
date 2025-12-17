@@ -3,7 +3,7 @@
         <div class="card-body">
             <!-- Form Title -->
             <?php if ($_SESSION['login_user_id'] == 1 || $_SESSION['login_user_id'] == 2): ?>
-                <h3 class="text-center mb-4">New Event</h3>
+                <h3 class="text-center mb-4">New Course</h3>
                 <form id="eventForm">
                 <?php
                     // Include database connection
@@ -22,11 +22,11 @@
                         <!-- Left Column -->
                         <div class="col-md-6 border-right">
                             <div class="form-group">
-                                <label for="eventname" class="control-label">Event Name</label>
+                                <label for="eventname" class="control-label">Course Name</label>
                                 <input type="text" name="eventname" id="eventname" class="form-control form-control-sm border border-dark rounded" required>
                             </div>
                             <div class="form-group">
-                                <label for="eventtype" class="control-label">Event Type</label>
+                                <label for="eventtype" class="control-label">Course Type</label>
                                 <select name="eventtype" id="eventtype" class="form-control form-control-sm border border-dark rounded" required>
                                     <option value="1">Conference</option>
                                     <option value="2">Seminar</option>
@@ -36,7 +36,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="eventorganizerid" class="control-label">Event Organizer</label>
+                                <label for="eventorganizerid" class="control-label">Course Organizer</label>
                                 <select name="eventorganizerid" id="eventorganizerid" class="form-control form-control-sm border border-dark rounded" required>
                                     <!-- Fetching organizers from the database -->
                                     <?php if ($_SESSION['login_user_id'] == 2): ?>
