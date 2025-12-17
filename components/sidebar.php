@@ -107,7 +107,7 @@
         <div class="mx-3">
             <a class="btn btn-outline-dark mt-4 w-100" href="./index.php?page=developers" type="button">Developers</a>
 
-            <a class="btn bg-gradient-dark w-100" href="./index.php?page=razorpay" type="button">Razorpay</a>
+            <a class="btn bg-gradient-dark w-100" href="./index.php?page=razorpay" type="button">DONATE USING RAZORPAY</a>
         </div>
     </div>
 </aside>

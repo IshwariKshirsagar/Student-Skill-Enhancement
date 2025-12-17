@@ -36,7 +36,7 @@
 </style>
 
 <div class="payment-container">
-    <h1>Complete Your Payment</h1>
+    <h1>Donate For Website Maintaince</h1>
     <p>Click the button below to proceed with your secure payment.</p>
     <div class="razorpay-button-container">
         <!-- Razorpay Payment Button -->

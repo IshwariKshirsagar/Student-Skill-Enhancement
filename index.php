@@ -76,7 +76,7 @@ th.sort-desc::after {
         <?php
             $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             if(!file_exists($page.".php")){
-                include './errors/404.html';
+                include './errors/FileNotFound.html';
             }else{
               include $page.'.php';
               include 'components/footer.php';
