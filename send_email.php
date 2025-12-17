@@ -25,15 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; // Your SMTP server
         $mail->SMTPAuth = true;
-        $mail->Username = ''; // Your email
-        $mail->Password = ''; // Your email password or app-specific password
+        $mail->Username = 'studentskillenhancement@gmail.com'; // Your email
+        $mail->Password = 'vypcywtmgenqgyms'; // Your email password or app-specific password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
         $mail->SMTPDebug = 0; // or PHPMailer::DEBUG_SERVER
 
 
         // Email settings
-        $mail->setFrom('yogeshkshirsagar393@gmail.com', 'Yogesh'); // Sender email and name
+        $mail->setFrom('studentskillenhancement@gmail.com', 'StudentSkillEnhancement'); // Sender email and name
         $mail->addAddress($recipient); // Recipient email
         $mail->Subject = $subject; // Email subject
         $mail->Body = $message; // Email body

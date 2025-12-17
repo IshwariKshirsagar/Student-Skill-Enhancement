@@ -105,13 +105,7 @@ body {
         <div class="form-group">
             <label for="recipient">Select Recipient</label>
             <?php 
-                if($_SESSION['login_user_type']==1){
-                    $sql = "SELECT * FROM users_database WHERE user_type = 2";
-                }else if($_SESSION['login_user_type']==2){
-                    $sql = "SELECT * FROM users_database WHERE user_type = 3";
-                }else if($_SESSION['login_user_type']==3){
-                    $sql = "SELECT * FROM users_database WHERE user_type = 4";
-                }
+                $sql = "SELECT * FROM users_database";
                 $result = $conn->query($sql);
             ?>
             <select name="recipient" id="recipient" required>
