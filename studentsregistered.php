@@ -26,55 +26,77 @@
         <div class="card card-outline card-success">
             <div class="card-header">
                 <div class="card-tools">
-                    <a class="btn btn-block btn-sm btn-primary btn-flat" href="./index.php?page=new_user">
-                        <i class="fa fa-plus"></i> Add New User
+                    <a class="btn btn-block btn-sm btn-primary btn-flat" href="./index.php?page=course">
+                        <i class="fa fa-arrow-left"></i> Go Back
                     </a>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-bordered" id="sortableTable">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="text-center" onclick="sortTable(0)">#</th>
-                                <th onclick="sortTable(1)">Name</th>
-                                <th onclick="sortTable(2)">Email</th>
-                                <th onclick="sortTable(3)">Role</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+
+                    <?php
                             $i = 1;
+                            $course_id = isset($_GET['course_id']) ? $_GET['course_id'] : 0;
                             $type = array('', "Admin", "Course Owner", "Student");
 
-                            // UPDATED QUERY: list students registered for course_id = 1
+                            $count_qry = $conn->query("
+                                SELECT COUNT(*) AS total_students
+                                FROM studentcourseregistered
+                                WHERE course_id = $course_id
+                            ");
+
+                            $count_row = $count_qry->fetch_assoc();
+                            $total_students = $count_row['total_students'];
+                            
                             $qry = $conn->query("
                                 SELECT u.*, scr.course_id
                                 FROM users_database u
                                 INNER JOIN studentcourseregistered scr 
                                     ON scr.user_id = u.user_id
+                                    WHERE scr.course_id = $course_id
                                 
                             ");
-                            // WHERE scr.course_id = 1
                             ?>
-                            <?php while ($row = $qry->fetch_assoc()): ?>
-                            <tr>
-                                <th class="text-center"><?php echo $i++ ?></th>
-                                <td><b><?php echo ucwords($row['name']) ?></b></td>
-                                <td><b><?php echo $row['email'] ?></b></td>
-                                <td><b><?php echo $type[$row['user_type']] ?></b></td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-sm btn-danger remove_user"
-                                        data-id="<?php echo $row['user_id'] ?>"
-                                        data-courseid="<?php echo $row['course_id'] ?>">
-                                        Remove
-                                    </button>
-                                </td>
-                            </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
+                    <?php if($total_students > 0): ?>
+                        <table class="table table-hover table-bordered" id="sortableTable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center" onclick="sortTable(0)">#</th>
+                                    <th onclick="sortTable(1)">Name</th>
+                                    <th onclick="sortTable(2)">Email</th>
+                                    <th onclick="sortTable(3)">Phone Number</th>
+                                    <th onclick="sortTable(4)">Role</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = $qry->fetch_assoc()): ?>
+                                <tr>
+                                    <th class="text-center"><?php echo $i++ ?></th>
+                                    <td><b><?php echo ucwords($row['name']) ?></b></td>
+                                    <td><b><?php echo $row['email'] ?></b></td>
+                                    <td><b><?php echo $row['phone_number'] ?></b></td>
+                                    <td><b><?php echo $type[$row['user_type']] ?></b></td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-sm btn-danger remove_user"
+                                            data-id="<?php echo $row['user_id'] ?>"
+                                            data-courseid="<?php echo $row['course_id'] ?>">
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    <?php endif;?>
+                    <?php if($total_students <= 0): ?>
+                        <div class="card-body p-3">
+                            <div class="text-center">
+                                <h6 class="text-muted">No Students found</h6>
+                            </div>
+                        </div>
+                    <?php endif;?>
+
                 </div>
             </div>
         </div>
@@ -133,4 +155,5 @@
     </script>
 
 </body>
+
 </html>

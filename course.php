@@ -102,8 +102,8 @@ if ($_SESSION['login_user_type'] == 1) {
 
                 <td><b><?php echo $row['owner_name']; ?></b></td>
 
-                <td class="text-center" href="./index.php?page=studentsregistered">
-                    <a href="./index.php?page=studentsregistered">
+                <td class="text-center">
+                    <a href="./index.php?page=studentsregistered&course_id=<?php echo $row['course_id']; ?>">
                     <button type="button" class="btn btn-sm btn-danger" 
                         data-id="<?php echo $row['course_id']; ?>">
                         View
