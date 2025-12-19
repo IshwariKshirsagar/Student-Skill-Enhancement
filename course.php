@@ -26,6 +26,17 @@ if ($_SESSION['login_user_type'] == 1) {
         JOIN users_database u ON cd.course_owner = u.user_id
     ");
 } else { 
+    // $qry = $conn->query("
+    //     SELECT 
+    //         cd.course_id,
+    //         cd.course_name,
+    //         ct.course_type_name,
+    //         u.name AS owner_name
+    //     FROM course_database cd
+    //     JOIN course_type ct ON cd.course_type = ct.course_type_id
+    //     JOIN users_database u ON cd.course_owner = u.user_id
+    //     WHERE cd.course_owner = " . $_SESSION['login_user_id']
+    // );
     $qry = $conn->query("
         SELECT 
             cd.course_id,
@@ -35,8 +46,7 @@ if ($_SESSION['login_user_type'] == 1) {
         FROM course_database cd
         JOIN course_type ct ON cd.course_type = ct.course_type_id
         JOIN users_database u ON cd.course_owner = u.user_id
-        WHERE cd.course_owner = " . $_SESSION['login_user_id']
-    );
+    ");
 }
 ?>
 <div class="card-header">
@@ -53,6 +63,7 @@ if ($_SESSION['login_user_type'] == 1) {
                 <th onclick="sortTable(1)">Course Name</th>
                 <th onclick="sortTable(2)">Course Type</th>
                 <th onclick="sortTable(3)">Course Owner</th>
+                <th>View</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -91,9 +102,17 @@ if ($_SESSION['login_user_type'] == 1) {
 
                 <td><b><?php echo $row['owner_name']; ?></b></td>
 
+                <td class="text-center" href="./index.php?page=studentsregistered">
+                    <a href="./index.php?page=studentsregistered">
+                    <button type="button" class="btn btn-sm btn-danger" 
+                        data-id="<?php echo $row['course_id']; ?>">
+                        View
+                    </button>
+                    </a>
+                </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-danger delete_user"
-                        data-id="<?php // echo $row['course_id']; ?>">
+                    <button type="button" class="btn btn-sm btn-danger delete_course"
+                        data-id="<?php echo $row['course_id']; ?>">
                         Delete
                     </button>
                 </td>

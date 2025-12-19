@@ -28,11 +28,17 @@
                             <div class="form-group">
                                 <label for="eventtype" class="control-label">Course Type</label>
                                 <select name="eventtype" id="eventtype" class="form-control form-control-sm border border-dark rounded" required>
-                                    <option value="1">Conference</option>
-                                    <option value="2">Seminar</option>
-                                    <option value="3">Workshop</option>
-                                    <option value="4">Webinar</option>
-                                    <option value="5">Festival</option>
+                                    <?php while ($organizer = mysqli_fetch_assoc($organizerResult)): ?>
+                                            <option value="<?php echo $organizer['user_id']; ?>"><?php echo $organizer['name']; ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventtype" class="control-label">Course Owner</label>
+                                <select name="eventtype" id="eventtype" class="form-control form-control-sm border border-dark rounded" required>
+                                    <?php while ($organizer = mysqli_fetch_assoc($organizerResult)): ?>
+                                            <option value="<?php echo $organizer['user_id']; ?>"><?php echo $organizer['name']; ?></option>
+                                    <?php endwhile; ?>
                                 </select>
                             </div>
                             <div class="form-group">

@@ -6,9 +6,10 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand px-4 py-3 m-0" href="" target="_blank">
             <img src="assets/img/favicon.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+
             <?php if($_SESSION['login_user_type'] == 1): ?>
             <span class="ms-1 text-sm text-dark">ADMIN</span>
-            <?php endif;?>
+            <?php endif; ?>
             <?php if($_SESSION['login_user_type'] == 2): ?>
             <span class="ms-1 text-sm text-dark">COURSE OWNER</span>
             <?php endif;?>
@@ -35,6 +36,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-dark" href="./index.php?page=new_user">
+                    <i class="material-symbols-rounded opacity-5">view_in_ar</i>
+                    <span class="nav-link-text ms-1">Add User</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-dark" href="./index.php?page=course">
                     <i class="material-symbols-rounded opacity-5">table_view</i>
                     <span class="nav-link-text ms-1">Courses</span>
@@ -43,23 +50,9 @@
             <?php endif;?>
             <?php if($_SESSION['login_user_type'] == 2): ?>
             <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=list_user">
-                    <i class="material-symbols-rounded opacity-5">list</i>
-                    <span class="nav-link-text ms-1">Clients</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link text-dark" href="./index.php?page=course">
                     <i class="material-symbols-rounded opacity-5">table_view</i>
                     <span class="nav-link-text ms-1">Courses</span>
-                </a>
-            </li>
-            <?php endif;?>
-
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=new_user">
-                    <i class="material-symbols-rounded opacity-5">view_in_ar</i>
-                    <span class="nav-link-text ms-1">Add User</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -68,6 +61,8 @@
                     <span class="nav-link-text ms-1">Add Course</span>
                 </a>
             </li>
+            <?php endif;?>
+            
             <li class="nav-item">
                 <a class="nav-link text-dark" href="./index.php?page=Q-A">
                     <i class="material-symbols-rounded opacity-5">receipt_long</i>
@@ -107,8 +102,8 @@
         <div class="mx-3">
             <a class="btn btn-outline-dark mt-4 w-100" href="./index.php?page=developers" type="button">Developers</a>
 
-            <a class="btn bg-gradient-dark w-100" href="./index.php?page=razorpay" type="button">DONATE USING RAZORPAY</a>
+            <a class="btn bg-gradient-dark w-100" href="./index.php?page=razorpay" type="button">DONATE USING
+                RAZORPAY</a>
         </div>
     </div>
 </aside>
-

@@ -42,7 +42,7 @@ th.sort-desc::after {
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <title>
-        Student Management System
+        <?php echo $_SESSION['system']['project_name'] ?>
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -62,7 +62,7 @@ th.sort-desc::after {
 <body class="g-sidenav-show  bg-gray-100">
     <?php include 'components/sidebar.php' ?>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <?php include 'components/navbar.php' ?>
+        <?php include 'components/navbar.php'; ?>
         <div class="container-fluid py-2">
             <div class="row">
                 <div class="ms-3">
@@ -75,7 +75,9 @@ th.sort-desc::after {
         </div>
         <?php
             $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-            if(!file_exists($page.".php")){
+            if($page == "home"){
+               include $page.'.php';
+            }else if(!file_exists($page.".php")){
                 include './errors/FileNotFound.html';
             }else{
               include $page.'.php';

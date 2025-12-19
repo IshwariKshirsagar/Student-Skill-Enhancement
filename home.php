@@ -3,19 +3,36 @@
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" onclick="location.href='./index.php?page=event'">
             <div class="card">
-                <div class="card-header p-2 ps-3">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(*) as total_course FROM course_database"; }else { $sql = "SELECT count(*) as total_course FROM course_database WHERE event_organizer_id=".$_SESSION['login_user_id']; } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourse = $row['total_course']; ?>
-                            <p class="text-sm mb-0 text-capitalize">Total Courses Enrolled</p>
-                            <h4 class="mb-0"><?php echo $totalCourse; ?></h4>
-                        </div>
-                        <div
-                            class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                            <i class="material-symbols-rounded opacity-10">weekend</i>
+                <?php if($_SESSION['login_user_type'] == 1): ?>
+                    <div class="card-header p-2 ps-3">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(*) as total_course FROM course_database"; }else { $sql = "SELECT count(*) as total_course FROM course_database WHERE course_owner=".$_SESSION['login_user_id']; } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourse = $row['total_course']; ?>
+                                <p class="text-sm mb-0 text-capitalize">Total Courses Enrolled</p>
+                                <h4 class="mb-0"><?php echo $totalCourse; ?></h4>
+                            </div>
+                            <div
+                                class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                                <i class="material-symbols-rounded opacity-10">weekend</i>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif;?>
+                <?php if($_SESSION['login_user_type'] == 2): ?>
+                    <div class="card-header p-2 ps-3">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(*) as total_course FROM course_database"; }else { $sql = "SELECT count(*) as total_course FROM course_database WHERE course_owner=".$_SESSION['login_user_id']; } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourse = $row['total_course']; ?>
+                                <p class="text-sm mb-0 text-capitalize">Total Courses Enrolled</p>
+                                <h4 class="mb-0"><?php echo $totalCourse; ?></h4>
+                            </div>
+                            <div
+                                class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                                <i class="material-symbols-rounded opacity-10">weekend</i>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif;?>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-2 ps-3">
                     <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+55% </span>than last week</p>
@@ -50,7 +67,8 @@
                         <div>
                             <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(name) as total_user FROM users_database"; }  
                             else{  
-                                $sql = "SELECT count(name) as total_user FROM users_database WHERE event_organizer_id=".$_SESSION['login_user_id']; 
+                                // $sql = "SELECT count(name) as total_user FROM users_database WHERE course_owner=".$_SESSION['login_user_id']; 
+                                $sql = "SELECT count(name) as total_user FROM users_database";
                                 } $result = $conn->query($sql); 
                                 $row = $result->fetch_assoc(); 
                                 $totalUsers = $row['total_user']; 
@@ -79,7 +97,7 @@
                         <div>
                             <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(course_type_name) as total_course_type FROM course_type"; } 
                             else { 
-                                 $sql = "SELECT count(course_type_name) as total_course_type FROM course_type WHERE event_organizer_id=".$_SESSION['login_user_id'];  } 
+                                 $sql = "SELECT count(course_type_name) as total_course_type FROM course_type ";  } 
                                  $result = $conn->query($sql); 
                                  $row = $result->fetch_assoc(); 
                                  $totalCourseType = $row['total_course_type']; ?>
