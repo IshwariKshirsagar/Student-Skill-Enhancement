@@ -176,7 +176,8 @@
                             </p>
                         </div>
                     </div>
-                </div> <?php if ($totalCourses > 0): ?> <div class="card-body px-0 pb-2">
+                </div> 
+                <?php if ($totalCourses > 0): ?> <div class="card-body px-0 pb-2">
                     <div class="table-responsive">
                         <table id="sortableTable" class="table align-items-center mb-0">
                             <thead>
@@ -253,11 +254,14 @@
                             </tbody>
                         </table>
                     </div>
-                </div> <?php else: ?> <div class="card-body p-3">
-                    <div class="text-center">
-                        <h6 class="text-muted">No Courses found</h6>
-                    </div>
-                </div> <?php endif; ?>
+                </div> 
+                <?php else: ?> 
+                    <div class="card-body p-3">
+                        <div class="text-center">
+                            <h6 class="text-muted">No Courses found</h6>
+                        </div>
+                    </div> 
+                <?php endif; ?>
             </div>
         </div>
         <!-- <div class="col-lg-4 col-md-6">
