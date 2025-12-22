@@ -1,159 +1,190 @@
+<?php
+include "db_connect.php";
+?>
+
+<!-- PAGE-SPECIFIC STYLES -->
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f4f9;
-    min-height: 100vh;
-    box-sizing: border-box;
+/* Page wrapper (DO NOT style body) */
+.send-email-page {
+    width: 100%;
+    min-height: calc(100vh - 120px); /* adjust if header height differs */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-}
-
-.email-container {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
+    padding: 30px;
     box-sizing: border-box;
-    margin: 20px auto;
 }
 
+/* Email Card */
+.email-container {
+    background-color: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+}
+
+/* Title */
 .email-container h2 {
     text-align: center;
+    font-weight: 700;
+    margin-bottom: 25px;
     color: #333;
-    margin-bottom: 20px;
 }
 
+/* Form group */
 .form-group {
-    margin-bottom: 15px;
-    position: relative;
+    margin-bottom: 18px;
 }
 
 .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-weight: 600;
     color: #555;
+    margin-bottom: 6px;
+    display: block;
 }
 
+/* Inputs */
 .form-group select,
 .form-group input,
-.form-group textarea,
-.form-group button {
+.form-group textarea {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    box-sizing: border-box;
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    transition: 0.3s ease;
 }
 
 .form-group textarea {
     resize: none;
-    height: 120px;
+    height: 140px;
 }
 
+/* Focus effect */
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #0ba270;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(11, 162, 112, 0.2);
+}
+
+/* Button */
 .form-group button {
-    background-color: rgb(11, 162, 112);
+    width: 100%;
+    background-color: #0ba270;
     color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
     border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .form-group button:hover {
-    background-color: rgb(11, 150, 100);
+    background-color: #09915f;
 }
 
-.form-group .error {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 5px;
-}
-
+/* Status message */
 #status {
     text-align: center;
+    font-weight: 600;
     margin-top: 10px;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
     .email-container {
-        padding: 15px;
-    }
-
-    .form-group button {
-        font-size: 0.9rem;
-        padding: 10px;
+        padding: 20px;
     }
 }
 </style>
-<?php include "db_connect.php"; ?>
-<div class="email-container">
-    <form id="email-form">
-        <h2>Send Email</h2>
-        <div class="form-group">
-            <label for="recipient">Select Recipient</label>
-            <?php 
-                $sql = "SELECT * FROM users_database";
-                $result = $conn->query($sql);
-            ?>
-            <select name="recipient" id="recipient" required>
-                <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                <option value="<?php echo $row['email']; ?>"> <?php echo $row['name']; ?></option>
-                <?php endwhile; ?>
-                <?php endif; ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" placeholder="Enter email subject" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" placeholder="Enter your message" required></textarea>
-        </div>
-        <div class="form-group">
-            <button type="button" onclick="sendEmail()">Send Email</button>
-        </div>
-        <div id="status" class="form-group"></div>
-    </form>
+
+<!-- PAGE CONTENT -->
+<div class="send-email-page">
+    <div class="email-container">
+
+        <form id="email-form">
+            <h2>Send Email</h2>
+
+            <!-- Recipient -->
+            <div class="form-group">
+                <label>Select Recipient</label>
+                <select name="recipient" id="recipient" required>
+                    <?php
+                    $sql = "SELECT email, name FROM users_database";
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()):
+                    ?>
+                        <option value="<?= $row['email']; ?>">
+                            <?= $row['name']; ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+
+            <!-- Subject -->
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" id="subject" placeholder="Enter email subject" required>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+                <label>Message</label>
+                <textarea id="message" placeholder="Enter your message" required></textarea>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <button type="button" onclick="sendEmail()">Send Email</button>
+            </div>
+
+            <!-- Status -->
+            <div id="status"></div>
+        </form>
+
+    </div>
 </div>
 
+<!-- SCRIPT -->
 <script>
 function sendEmail() {
     const recipient = document.getElementById('recipient').value;
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('message').value;
     const statusDiv = document.getElementById('status');
-    statusDiv.innerHTML = `<p style="color: green;">Sending Email</p>`;
+
+    statusDiv.innerHTML = '<span style="color:green;">Sending email...</span>';
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'send_email.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    xhr.onload = function() {
-        const statusDiv = document.getElementById('status');
+    xhr.onload = function () {
         if (xhr.status === 200) {
-            statusDiv.innerHTML = `<p style="color: green;">${xhr.responseText}</p>`;
+            statusDiv.innerHTML =
+                '<span style="color:green;">' + xhr.responseText + '</span>';
+
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 3000);
         } else {
-            statusDiv.innerHTML = `<p style="color: red;">Failed to send email. Try again.</p>`;
+            statusDiv.innerHTML =
+                '<span style="color:red;">Failed to send email.</span>';
         }
     };
 
     const data =
-        `recipient=${encodeURIComponent(recipient)}&subject=${encodeURIComponent(subject)}&message=${encodeURIComponent(message)}`;
+        'recipient=' + encodeURIComponent(recipient) +
+        '&subject=' + encodeURIComponent(subject) +
+        '&message=' + encodeURIComponent(message);
+
     xhr.send(data);
 }
 </script>
