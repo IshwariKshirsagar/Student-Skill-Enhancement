@@ -42,7 +42,7 @@
     ?>
     <?php 
         if ($_SESSION['login_user_type'] == 1) { 
-                $sql = "SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name FROM course_database cd JOIN course_type ct ON cd.course_type = ct.course_type_id JOIN users_database u ON cd.course_owner = u.user_id"; 
+                $sql = "SELECT count(*) AS total_course FROM course_database cd JOIN course_type ct ON cd.course_type = ct.course_type_id JOIN users_database u ON cd.course_owner = u.user_id"; 
         } 
         elseif($_SESSION['login_user_type'] == 2) { 
                 $sql = "SELECT count(*) AS total_course FROM course_database cd JOIN course_type ct ON cd.course_type = ct.course_type_id JOIN users_database u ON cd.course_owner = u.user_id WHERE cd.course_owner = " . $_SESSION['login_user_id']; 
