@@ -1,7 +1,7 @@
 <?php include "db_connect.php"; ?>
 <div class="container-fluid py-2">
     <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" onclick="location.href='./index.php?page=event'">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" onclick="location.href='./index.php?page='">
             <div class="card">
                 <?php if($_SESSION['login_user_type'] == 1): ?>
                     <div class="card-header p-2 ps-3">
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card" onclick="location.href='./index.php?page=list_user'">
+            <div class="card" onclick="location.href='./index.php?page='">
                 <div class="card-header p-2 ps-3">
                     <div class="d-flex justify-content-between">
                         <?php 
@@ -124,7 +124,7 @@
         </div>
 
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card" onclick="location.href='./index.php?page=event'">
+            <div class="card" onclick="location.href='./index.php?page='">
                 <div class="card-header p-2 ps-3">
                     <div class="d-flex justify-content-between">
                         <div>

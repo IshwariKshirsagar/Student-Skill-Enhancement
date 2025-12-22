@@ -58,11 +58,9 @@ body {
                           if($_SESSION['login_user_type'] == 1){
                               echo 'Admin';
                           }else if($_SESSION['login_user_type'] == 2){
-                              echo 'Organizer';
+                              echo 'Course Owner';
                           }else if($_SESSION['login_user_type'] == 3){
-                              echo 'Client';
-                          }else if($_SESSION['login_user_type'] == 4){
-                              echo 'Attendee';
+                              echo 'Student';
                           }
                     ?>
                     </p>
