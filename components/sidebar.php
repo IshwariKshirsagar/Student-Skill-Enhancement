@@ -29,24 +29,24 @@
                 </a>
             </li>
             <?php if($_SESSION['login_user_type'] == 1): ?>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=list_user">
-                    <i class="material-symbols-rounded opacity-5">list</i>
-                    <span class="nav-link-text ms-1">Users</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=new_user">
-                    <i class="material-symbols-rounded opacity-5">view_in_ar</i>
-                    <span class="nav-link-text ms-1">Add User</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="./index.php?page=course">
-                    <i class="material-symbols-rounded opacity-5">table_view</i>
-                    <span class="nav-link-text ms-1">Courses</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="./index.php?page=list_user">
+                        <i class="material-symbols-rounded opacity-5">list</i>
+                        <span class="nav-link-text ms-1">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="./index.php?page=new_user">
+                        <i class="material-symbols-rounded opacity-5">view_in_ar</i>
+                        <span class="nav-link-text ms-1">Add User</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="./index.php?page=course">
+                        <i class="material-symbols-rounded opacity-5">table_view</i>
+                        <span class="nav-link-text ms-1">Courses</span>
+                    </a>
+                </li>
             <?php endif;?>
             <?php if($_SESSION['login_user_type'] == 2): ?>
             <li class="nav-item">

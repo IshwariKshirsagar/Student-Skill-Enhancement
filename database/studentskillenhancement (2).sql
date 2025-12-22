@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2025 at 02:59 PM
+-- Generation Time: Dec 22, 2025 at 02:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -77,8 +77,6 @@ INSERT INTO `course_database` (`course_id`, `course_name`, `course_type`, `cours
 (2, 'Python Programming', 1, 17, '2025-12-15 08:19:16'),
 (3, 'Android Programming', 5, 19, '2025-12-15 08:20:40'),
 (4, 'Elements of Electrical Engineering', 2, 16, '2025-12-15 08:33:52'),
-(5, 'Estimation', 3, 21, '2025-12-15 08:38:31'),
-(6, 'Design of RCC Structure', 3, 21, '2025-12-15 08:39:56'),
 (7, 'Thermodynamics', 6, 22, '2025-12-15 09:54:17'),
 (8, 'PHP', 1, 17, '2025-12-16 03:50:02');
 
@@ -122,8 +120,7 @@ CREATE TABLE `studentcourseregistered` (
 --
 
 INSERT INTO `studentcourseregistered` (`id`, `course_id`, `user_id`) VALUES
-(1, 1, 21),
-(2, 3, 21);
+(2, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -183,8 +180,8 @@ INSERT INTO `users_database` (`user_id`, `name`, `email`, `password`, `user_type
 (16, 'Shlok Javheri', 'shlokjavheri@gmail.com', 'shlokjavheri@gmail.com', 2, '+918888888888', 'Dharashiv', '', '', '', '', '', '', '', '2025-01-12 14:16:51'),
 (17, 'Vinod Kumar', 'vinodkumar@gmail.com', 'vinodkumar@gmail.com', 2, '+919999999999', 'Latur', '', '', '', '', '', '', '', '2025-01-12 14:21:47'),
 (19, 'Tushar Gawande', 'tushargawande@gmail.com', 'tushargawande@gmail.com', 2, '+919022361966', 'Chhatrapati Sambhajinagar', '', '', '', '', '', '', '', '2025-02-20 14:08:06'),
-(21, 'Ashwini Kadam', 'ashwinikadam@gmail.com', 'ashwinikadam@gmail.com', 2, '+917777777777', 'Pune', '', '', '', '', '', '', '', '2025-12-15 14:07:47'),
-(22, 'Kajal Patil', 'kajalpatil@gmail.com', 'kajalpatil@gmail.com', 2, '+916666666666', 'Mumbai', '', '', '', '', '', '', '', '2025-12-15 15:23:05');
+(22, 'Kajal Patil', 'kajalpatil@gmail.com', 'kajalpatil@gmail.com', 2, '+916666666666', 'Mumbai', '', '', '', '', '', '', '', '2025-12-15 15:23:05'),
+(26, 'Rupa', 'sharma', 'rupasharma@gmail.com', 3, '+918292829282', 'Solapur', '', '', '', '', '', '', '', '2025-12-19 22:37:42');
 
 --
 -- Indexes for dumped tables
@@ -257,7 +254,7 @@ ALTER TABLE `course_type`
 -- AUTO_INCREMENT for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -269,7 +266,7 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `users_database`
 --
 ALTER TABLE `users_database`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

@@ -47,11 +47,12 @@
                             $type = array('', "Admin", "Course Owner", "Student");
                             if ($_SESSION['login_user_type'] == 1) {
                                 $qry = $conn->query("SELECT * FROM users_database");
-                            } else if ($_SESSION['login_user_type'] == 2) {
-                                $qry = $conn->query("SELECT * FROM users_database WHERE user_type = 3 OR user_type = 4");
-                            } else if ($_SESSION['login_user_type'] == 3) {
-                                $qry = $conn->query("SELECT * FROM users_database WHERE user_type = 4");
-                            }
+                            } 
+                            // else if ($_SESSION['login_user_type'] == 2) {
+                            //     $qry = $conn->query("SELECT * FROM users_database WHERE user_type = 3 OR user_type = 4");
+                            // } else if ($_SESSION['login_user_type'] == 3) {
+                            //     $qry = $conn->query("SELECT * FROM users_database WHERE user_type = 4");
+                            // }
                         ?>
                         <?php while ($row = $qry->fetch_assoc()): ?>
                         <tr>

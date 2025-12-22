@@ -7,7 +7,15 @@
                     <div class="card-header p-2 ps-3">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(*) as total_course FROM course_database"; }else { $sql = "SELECT count(*) as total_course FROM course_database WHERE course_owner=".$_SESSION['login_user_id']; } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourse = $row['total_course']; ?>
+                                <?php if($_SESSION['login_user_type'] == 1){ 
+                                    $sql = "SELECT count(*) as total_course FROM course_database"; 
+                                }else { 
+                                    $sql = "SELECT count(*) as total_course FROM course_database WHERE course_owner=".$_SESSION['login_user_id']; 
+                                } 
+                                $result = $conn->query($sql); 
+                                $row = $result->fetch_assoc(); 
+                                $totalCourse = $row['total_course']; 
+                                ?>
                                 <p class="text-sm mb-0 text-capitalize">Total Courses Enrolled</p>
                                 <h4 class="mb-0"><?php echo $totalCourse; ?></h4>
                             </div>
@@ -16,6 +24,10 @@
                                 <i class="material-symbols-rounded opacity-10">weekend</i>
                             </div>
                         </div>
+                    </div>
+                                        <hr class="dark horizontal my-0">
+                    <div class="card-footer p-2 ps-3">
+                        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+55% </span>than last week</p>
                     </div>
                 <?php endif;?>
                 <?php if($_SESSION['login_user_type'] == 2): ?>
@@ -23,7 +35,7 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <?php if($_SESSION['login_user_type'] == 1){ $sql = "SELECT count(*) as total_course FROM course_database"; }else { $sql = "SELECT count(*) as total_course FROM course_database WHERE course_owner=".$_SESSION['login_user_id']; } $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourse = $row['total_course']; ?>
-                                <p class="text-sm mb-0 text-capitalize">Total Courses Enrolled</p>
+                                <p class="text-sm mb-0 text-capitalize">Total Students Registered</p>
                                 <h4 class="mb-0"><?php echo $totalCourse; ?></h4>
                             </div>
                             <div
@@ -32,20 +44,36 @@
                             </div>
                         </div>
                     </div>
+                    <hr class="dark horizontal my-0">
+                    <div class="card-footer p-2 ps-3">
+                        <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+55% </span>than last week</p>
+                    </div>
                 <?php endif;?>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-2 ps-3">
-                    <p class="mb-0 text-sm"><span class="text-success font-weight-bolder">+55% </span>than last week</p>
-                </div>
             </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card" onclick="location.href='./index.php?page=list_user'">
                 <div class="card-header p-2 ps-3">
                     <div class="d-flex justify-content-between">
-                        <?php $sql = "SELECT count(*) as total_course FROM course_database"; $result = $conn->query($sql); $row = $result->fetch_assoc(); $totalCourse = $row['total_course']; ?>
+                        <?php 
+                        if($_SESSION['login_user_type'] == 1){
+                            $sql = "SELECT count(*) as total_course FROM course_database"; 
+                        }elseif($_SESSION['login_user_type'] == 2){
+                            $sql = "SELECT COUNT(*) AS total_course 
+                                    FROM course_database 
+                                    WHERE course_owner = " . $_SESSION['login_user_id'];
+                        }
+                        $result = $conn->query($sql); 
+                        $row = $result->fetch_assoc(); 
+                        $totalCourse = $row['total_course'];
+                        ?>
                         <div>
+                            <?php if($_SESSION['login_user_type'] == 1): ?>
                             <p class="text-sm mb-0 text-capitalize">Total Courses Completed</p>
+                            <?php endif;?>
+                            <?php if($_SESSION['login_user_type'] == 2): ?>
+                            <p class="text-sm mb-0 text-capitalize">Total Courses Registered</p>
+                            <?php endif;?>
                             <h4 class="mb-0"> <?php if($totalCourse==0){ echo "0"; }else{ echo $totalCourse; } ?> </h4>
                         </div>
                         <div
@@ -61,7 +89,12 @@
             </div>
         </div>
         <div class="col-xl-3 col-sm-6">
-            <div class="card" onclick="location.href='./index.php?page=event'">
+            <?php if($_SESSION['login_user_type'] == 1): ?>
+                <div class="card" onclick="location.href='./index.php?page=list_user'">
+            <?php endif;?>
+            <?php if($_SESSION['login_user_type'] == 2): ?>
+                <div class="card" onclick="location.href='./index.php'">
+            <?php endif;?>
                 <div class="card-header p-2 ps-3">
                     <div class="d-flex justify-content-between">
                         <div>
@@ -222,12 +255,12 @@
                     </div>
                 </div> <?php else: ?> <div class="card-body p-3">
                     <div class="text-center">
-                        <h6 class="text-muted">No events found</h6>
+                        <h6 class="text-muted">No Courses found</h6>
                     </div>
                 </div> <?php endif; ?>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <!-- <div class="col-lg-4 col-md-6">
             <div class="card h-100">
                 <div class="card-header pb-0">
                     <h6>Orders overview</h6>
@@ -283,7 +316,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 

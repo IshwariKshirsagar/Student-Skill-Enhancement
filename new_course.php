@@ -135,7 +135,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: 'operations/insert_event.php',
+                url: 'operations/insert_course.php',
                 data: formData,
                 processData: false, // Required for file uploads
                 contentType: false, // Required for file uploads
