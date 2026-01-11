@@ -37,11 +37,18 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Course Videos</h5>
 
-            <select id="videoFilter" class="form-control form-control-sm w-25">
-                <option value="all">All Videos</option>
-                <option value="watched">Watched Videos</option>
-                <option value="remaining">Remaining Videos</option>
-            </select>
+            <!-- SEARCH + FILTER -->
+            <div class="d-flex">
+                <input type="text" id="videoSearch"
+                       class="form-control form-control-sm mr-2"
+                       placeholder="Search videos...">
+
+                <select id="videoFilter" class="form-control form-control-sm">
+                    <option value="all">All Videos</option>
+                    <option value="watched">Watched Videos</option>
+                    <option value="remaining">Remaining Videos</option>
+                </select>
+            </div>
         </div>
 
         <div class="card-body p-0">
@@ -111,22 +118,24 @@
 </div>
 
 <script>
-document.getElementById("videoFilter").addEventListener("change", function () {
-    let filter = this.value;
+function filterVideos() {
+    let filter = document.getElementById("videoFilter").value;
+    let search = document.getElementById("videoSearch").value.toLowerCase();
     let rows = document.querySelectorAll("#videoList tr");
 
     rows.forEach(row => {
         let status = row.getAttribute("data-status");
+        let text = row.innerText.toLowerCase();
 
-        if (filter === "all") {
-            row.style.display = "";
-        } else if (filter === status) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
+        let statusMatch = (filter === "all" || filter === status);
+        let searchMatch = text.includes(search);
+
+        row.style.display = (statusMatch && searchMatch) ? "" : "none";
     });
-});
+}
+
+document.getElementById("videoFilter").addEventListener("change", filterVideos);
+document.getElementById("videoSearch").addEventListener("keyup", filterVideos);
 </script>
 
 </body>
