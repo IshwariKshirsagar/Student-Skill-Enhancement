@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2026 at 03:19 PM
+-- Generation Time: Jan 11, 2026 at 05:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -103,6 +103,28 @@ INSERT INTO `course_type` (`course_type_id`, `course_type_name`) VALUES
 (4, 'Electronics Engineering'),
 (5, 'Information Technology'),
 (6, 'Mechanical Enginnering');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_videos`
+--
+
+CREATE TABLE `course_videos` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `Thumbnail` varchar(500) NOT NULL,
+  `VideoTitle` varchar(100) NOT NULL,
+  `Description` varchar(300) NOT NULL,
+  `Status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `course_videos`
+--
+
+INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Description`, `Status`) VALUES
+(1, 3, 'https://img.youtube.com/vi/dQw4w9WgXcQ/default.jpg', 'Video1', 'Desc', 0);
 
 -- --------------------------------------------------------
 
@@ -210,6 +232,13 @@ ALTER TABLE `course_type`
   ADD PRIMARY KEY (`course_type_id`);
 
 --
+-- Indexes for table `course_videos`
+--
+ALTER TABLE `course_videos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_course_videos_course` (`course_id`);
+
+--
 -- Indexes for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
@@ -252,6 +281,12 @@ ALTER TABLE `course_type`
   MODIFY `course_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `course_videos`
+--
+ALTER TABLE `course_videos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
@@ -285,6 +320,12 @@ ALTER TABLE `chat`
 ALTER TABLE `course_database`
   ADD CONSTRAINT `course_owner` FOREIGN KEY (`course_owner`) REFERENCES `users_database` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `course_type` FOREIGN KEY (`course_type`) REFERENCES `course_type` (`course_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `course_videos`
+--
+ALTER TABLE `course_videos`
+  ADD CONSTRAINT `fk_course_videos_course` FOREIGN KEY (`course_id`) REFERENCES `course_database` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `studentcourseregistered`
