@@ -55,7 +55,7 @@ $conn->query("UPDATE course_videos SET Status = 1 WHERE id = $video_id");
                 <?php if (!empty($video['video'])): ?>
                 <!-- Uploaded video -->
                 <video controls class="embed-responsive-item">
-                    <source src="../<?= $video['video'] ?>" type="video/mp4">
+                    <source src="<?= htmlspecialchars($video['video']) ?>" type="video/mp4">
                     Your browser does not support video playback.
                 </video>
                 <?php else: ?>

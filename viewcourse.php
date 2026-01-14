@@ -82,7 +82,7 @@ $qry = $conn->query("
                 <td class="text-center"><?= $i++ ?></td>
 
                 <td class="text-center">
-                    <img src="../<?= $row['Thumbnail'] ?>" width="120">
+                    <img src="<?= htmlspecialchars($row['Thumbnail']) ?>" width="160">
                 </td>
 
                 <td><b><?= htmlspecialchars($row['VideoTitle']) ?></b></td>

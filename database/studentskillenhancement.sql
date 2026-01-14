@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2026 at 08:52 AM
+-- Generation Time: Jan 14, 2026 at 05:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -125,7 +125,12 @@ CREATE TABLE `course_videos` (
 --
 
 INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Description`, `video`, `Status`) VALUES
-(1, 3, 'https://img.youtube.com/vi/dQw4w9WgXcQ/default.jpg', 'Video1', 'Desc', '', 0);
+(2, 1, '../thumbnail/1768382294_Yogesh.png', 'T1', 'Desc2', '../course_videos/1768382294_watchanimeworld.mp4', 1),
+(3, 1, '../thumbnail/1768382525_Screenshot 2025-08-26 023737.png', 'AJP', 'Desc2', '../course_videos/1768382525_shinchan new episode in hindi without zoom effect #25095095.mp4', 1),
+(5, 1, '../thumbnail/1768383123_Screenshot 2026-01-11 090447.png', 'Title 4', 'desc 4', '../course_videos/1768383123_Golmaal.Returns.720p.themoviesflix.in.mkv', 1),
+(6, 1, '../thumbnail/1768383123_Screenshot 2026-01-11 090447.png', 'Title 5', 'Desc 5', '../course_videos/1768385065_ssvid.net--Doremon-New-Latest-episode-in-HindiDoremon-New-Episode-In-Hindi_480p.mp4', 0),
+(9, 4, '../thumbnail/1768388481_YO.png', 'T1', 'D1', '../course_videos/1768388481_ssvid.net--Doremon-New-Latest-episode-in-HindiDoremon-New-Episode-In-Hindi_480p.mp4', 1),
+(10, 4, '../thumbnail/1768407591_Screenshot (14).png', 'T7', 'D7', '../course_videos/1768407591_videoplayback.mp4', 1);
 
 -- --------------------------------------------------------
 
@@ -144,7 +149,8 @@ CREATE TABLE `studentcourseregistered` (
 --
 
 INSERT INTO `studentcourseregistered` (`id`, `course_id`, `user_id`) VALUES
-(2, 3, 5);
+(2, 1, 5),
+(4, 4, 26);
 
 -- --------------------------------------------------------
 
@@ -205,7 +211,7 @@ INSERT INTO `users_database` (`user_id`, `name`, `email`, `password`, `user_type
 (17, 'Vinod Kumar', 'vinodkumar@gmail.com', 'vinodkumar@gmail.com', 2, '+919999999999', 'Latur', '', '', '', '', '', '', '', '2025-01-12 14:21:47'),
 (19, 'Tushar Gawande', 'tushargawande@gmail.com', 'tushargawande@gmail.com', 2, '+919022361966', 'Chhatrapati Sambhajinagar', '', '', '', '', '', '', '', '2025-02-20 14:08:06'),
 (22, 'Kajal Patil', 'kajalpatil@gmail.com', 'kajalpatil@gmail.com', 2, '+916666666666', 'Mumbai', '', '', '', '', '', '', '', '2025-12-15 15:23:05'),
-(26, 'Rupa', 'sharma', 'rupasharma@gmail.com', 3, '+918292829282', 'Solapur', '', '', '', '', '', '', '', '2025-12-19 22:37:42');
+(26, 'Rupa', 'rupasharma@gmail.com', 'rupasharma@gmail.com', 3, '+918292829282', 'Solapur', '', '', '', '', '', '', '', '2025-12-19 22:37:42');
 
 --
 -- Indexes for dumped tables
@@ -285,13 +291,13 @@ ALTER TABLE `course_type`
 -- AUTO_INCREMENT for table `course_videos`
 --
 ALTER TABLE `course_videos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
