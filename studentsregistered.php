@@ -12,8 +12,8 @@ if (isset($_POST['save_video'])) {
     $desc  = $_POST['description'];
 
     // folders
-    $thumbDir = "thumbnail/";
-    $videoDir = "course_videos/";
+    $thumbDir = "../thumbnail/";
+    $videoDir = "../course_videos/";
 
     if (!is_dir($thumbDir)) mkdir($thumbDir, 0777, true);
     if (!is_dir($videoDir)) mkdir($videoDir, 0777, true);
