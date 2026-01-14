@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2026 at 05:23 AM
+-- Generation Time: Jan 14, 2026 at 08:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -116,6 +116,7 @@ CREATE TABLE `course_videos` (
   `Thumbnail` varchar(500) NOT NULL,
   `VideoTitle` varchar(100) NOT NULL,
   `Description` varchar(300) NOT NULL,
+  `video` varchar(200) NOT NULL,
   `Status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -123,8 +124,8 @@ CREATE TABLE `course_videos` (
 -- Dumping data for table `course_videos`
 --
 
-INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Description`, `Status`) VALUES
-(1, 3, 'https://img.youtube.com/vi/dQw4w9WgXcQ/default.jpg', 'Video1', 'Desc', 0);
+INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Description`, `video`, `Status`) VALUES
+(1, 3, 'https://img.youtube.com/vi/dQw4w9WgXcQ/default.jpg', 'Video1', 'Desc', '', 0);
 
 -- --------------------------------------------------------
 

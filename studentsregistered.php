@@ -1,86 +1,131 @@
 <?php 
-    include 'db_connect.php';
+include 'db_connect.php';
+
+$course_id = isset($_GET['course_id']) ? (int)$_GET['course_id'] : 0;
+
+/* ===========================
+   ADD VIDEO LOGIC
+   =========================== */
+if (isset($_POST['save_video'])) {
+
+    $title = $_POST['video_title'];
+    $desc  = $_POST['description'];
+
+    // folders
+    $thumbDir = "thumbnail/";
+    $videoDir = "course_videos/";
+
+    if (!is_dir($thumbDir)) mkdir($thumbDir, 0777, true);
+    if (!is_dir($videoDir)) mkdir($videoDir, 0777, true);
+
+    $thumbName = time().'_'.$_FILES['thumbnail']['name'];
+    $videoName = time().'_'.$_FILES['video']['name'];
+
+    $thumbPath = $thumbDir.$thumbName;
+    $videoPath = $videoDir.$videoName;
+
+    move_uploaded_file($_FILES['thumbnail']['tmp_name'], $thumbPath);
+    move_uploaded_file($_FILES['video']['tmp_name'], $videoPath);
+
+    $conn->query("
+        INSERT INTO course_videos
+        (course_id, Thumbnail, VideoTitle, Description, video, Status)
+        VALUES
+        ('$course_id', '$thumbPath', '$title', '$desc', '$videoPath', 0)
+    ");
+
+    echo "<script>alert('Video added successfully');</script>";
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Manage Users</title>
+    <title>Course Details</title>
 
-    <!-- jQuery CDN -->
+    <!-- Bootstrap & jQuery -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-
-    <!-- Font Awesome (Using CDN instead of kit) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- Bootstrap CSS (Optional for better styling) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
-    <div class="col-lg-12">
+    <div class="col-lg-12 mt-3">
         <div class="card card-outline card-success">
-            <div class="card-header">
-                <div class="card-tools">
-                    <a class="btn btn-block btn-sm btn-primary btn-flat" href="./index.php?page=course">
-                        <i class="fa fa-arrow-left"></i> Go Back
-                    </a>
-                </div>
+
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Course Management</h5>
+                <a class="btn btn-sm btn-secondary" href="./index.php?page=course">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
             </div>
+
             <div class="card-body">
-                <div class="table-responsive">
+
+                <!-- Buttons -->
+                <div class="mb-3 text-right">
+                    <button class="btn btn-sm btn-success" id="showStudents">
+                        <i class="fa fa-users"></i> Registered Students
+                    </button>
+                    <button class="btn btn-sm btn-primary" id="showVideos">
+                        <i class="fa fa-video"></i> Add Videos
+                    </button>
+                </div>
+
+                <!-- ===========================
+             STUDENTS SECTION (UNCHANGED LOGIC)
+             =========================== -->
+                <div id="studentsSection">
 
                     <?php
-                            $i = 1;
-                            $course_id = isset($_GET['course_id']) ? $_GET['course_id'] : 0;
-                            $type = array('', "Admin", "Course Owner", "Student");
+        $i = 1;
+        $type = array('', "Admin", "Course Owner", "Student");
 
-                            $count_qry = $conn->query("
-                                SELECT COUNT(*) AS total_students
-                                FROM studentcourseregistered
-                                WHERE course_id = $course_id
-                            ");
+        $count_qry = $conn->query("
+            SELECT COUNT(*) AS total_students
+            FROM studentcourseregistered
+            WHERE course_id = $course_id
+        ");
+        $total_students = $count_qry->fetch_assoc()['total_students'];
 
-                            $count_row = $count_qry->fetch_assoc();
-                            $total_students = $count_row['total_students'];
-                            
-                            $qry = $conn->query("
-                                SELECT u.*, scr.course_id
-                                FROM users_database u
-                                INNER JOIN studentcourseregistered scr 
-                                    ON scr.user_id = u.user_id
-                                    WHERE scr.course_id = $course_id
-                                
-                            ");
-                            ?>
+        $qry = $conn->query("
+            SELECT u.*, scr.course_id
+            FROM users_database u
+            INNER JOIN studentcourseregistered scr 
+                ON scr.user_id = u.user_id
+            WHERE scr.course_id = $course_id
+        ");
+        ?>
+
                     <?php if($total_students > 0): ?>
-                        <table class="table table-hover table-bordered" id="sortableTable">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="text-center" onclick="sortTable(0)">#</th>
-                                    <th onclick="sortTable(1)">Name</th>
-                                    <th onclick="sortTable(2)">Email</th>
-                                    <th onclick="sortTable(3)">Phone Number</th>
-                                    <th onclick="sortTable(4)">Role</th>
-                                    <th>Action</th>
+                                    <th class="text-center">#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Role</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($row = $qry->fetch_assoc()): ?>
+                                <?php while($row = $qry->fetch_assoc()): ?>
                                 <tr>
-                                    <th class="text-center"><?php echo $i++ ?></th>
-                                    <td><b><?php echo ucwords($row['name']) ?></b></td>
-                                    <td><b><?php echo $row['email'] ?></b></td>
-                                    <td><b><?php echo $row['phone_number'] ?></b></td>
-                                    <td><b><?php echo $type[$row['user_type']] ?></b></td>
+                                    <td class="text-center"><?php echo $i++; ?></td>
+                                    <td><b><?php echo ucwords($row['name']); ?></b></td>
+                                    <td><?php echo $row['email']; ?></td>
+                                    <td><?php echo $row['phone_number']; ?></td>
+                                    <td><?php echo $type[$row['user_type']]; ?></td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-sm btn-danger remove_user"
-                                            data-id="<?php echo $row['user_id'] ?>"
-                                            data-courseid="<?php echo $row['course_id'] ?>">
+                                        <button class="btn btn-sm btn-danger remove_user"
+                                            data-id="<?php echo $row['user_id']; ?>"
+                                            data-courseid="<?php echo $row['course_id']; ?>">
                                             Remove
                                         </button>
                                     </td>
@@ -88,70 +133,89 @@
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
-                    <?php endif;?>
-                    <?php if($total_students <= 0): ?>
-                        <div class="card-body p-3">
-                            <div class="text-center">
-                                <h6 class="text-muted">No Students found</h6>
-                            </div>
-                        </div>
-                    <?php endif;?>
+                    </div>
+                    <?php else: ?>
+                    <div class="text-center text-muted">No Students Found</div>
+                    <?php endif; ?>
 
                 </div>
+
+                <!-- ===========================
+             ADD VIDEO SECTION
+             =========================== -->
+                <div id="videoSection" style="display:none;">
+                    <div class="card card-outline card-primary">
+                        <div class="card-header">
+                            <h6 class="mb-0">Add Course Video</h6>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label>Video Title</label>
+                                    <input type="text" name="video_title" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control" rows="3" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Thumbnail</label>
+                                    <input type="file" name="thumbnail" class="form-control-file" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Video File</label>
+                                    <input type="file" name="video" class="form-control-file" required>
+                                </div>
+
+                                <button type="submit" name="save_video" class="btn btn-success btn-sm">
+                                    <i class="fa fa-upload"></i> Upload Video
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
+    <!-- ===========================
+     JS
+     =========================== -->
     <script>
-    $(document).ready(function() {
-        $(document).on('click', '.remove_user', function() {
-            var userId = $(this).data('id');
-            var courseid = $(this).data('courseid');
-
-            if (confirm("Are you sure you want to remove this user?")) {
-                remove_user(userId, courseid);
-            }
-        });
+    document.querySelector("form").addEventListener("submit", function(e) {
+        const video = document.querySelector("input[name='video']").files[0];
+        if (video && video.size > 5000 * 1024 * 1024) {
+            alert("Video size is much bigger");
+            e.preventDefault();
+        }
+    });
+    $('#showStudents').click(function() {
+        $('#studentsSection').show();
+        $('#videoSection').hide();
     });
 
-    function remove_user(userId, courseid) {
-        $.ajax({
-            url: 'remove_user.php',
-            method: 'POST',
-            data: {
-                id: userId,
-                courseid: courseid
-            },
-            success: function(resp) {
-                if (resp == 1) {
-                    alert("User successfully removed.");
-                    location.reload();
-                } else {
-                    alert("Failed to remove user.");
-                }
-            },
-            error: function() {
-                alert("AJAX error occurred.");
-            }
-        });
-    }
+    $('#showVideos').click(function() {
+        $('#studentsSection').hide();
+        $('#videoSection').show();
+    });
 
-    function sortTable(columnIndex) {
-        const table = document.getElementById("sortableTable");
-        const rows = Array.from(table.rows).slice(1);
-        const isAscending = table.getAttribute(`data-sort-${columnIndex}`) !== "asc";
-
-        rows.sort((a, b) => {
-            const cellA = a.cells[columnIndex].innerText.trim().toLowerCase();
-            const cellB = b.cells[columnIndex].innerText.trim().toLowerCase();
-            if (cellA < cellB) return isAscending ? -1 : 1;
-            if (cellA > cellB) return isAscending ? 1 : -1;
-            return 0;
-        });
-
-        rows.forEach(row => table.tBodies[0].appendChild(row));
-        table.setAttribute(`data-sort-${columnIndex}`, isAscending ? "asc" : "desc");
-    }
+    $(document).on('click', '.remove_user', function() {
+        if (confirm('Remove this student?')) {
+            $.post('remove_user.php', {
+                id: $(this).data('id'),
+                courseid: $(this).data('courseid')
+            }, function(resp) {
+                if (resp == 1) location.reload();
+                else alert('Failed');
+            });
+        }
+    });
     </script>
 
 </body>
