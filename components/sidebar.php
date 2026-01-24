@@ -10,11 +10,11 @@ $current_page = $_GET['page'] ?? 'home';
             <img src="assets/img/favicon.png" class="navbar-brand-img" width="26" height="26">
 
             <?php if($_SESSION['login_user_type'] == 1): ?>
-                <span class="ms-1 text-sm text-dark">ADMIN</span>
+            <span class="ms-1 text-sm text-dark">ADMIN</span>
             <?php elseif($_SESSION['login_user_type'] == 2): ?>
-                <span class="ms-1 text-sm text-dark">COURSE OWNER</span>
+            <span class="ms-1 text-sm text-dark">COURSE OWNER</span>
             <?php elseif($_SESSION['login_user_type'] == 3): ?>
-                <span class="ms-1 text-sm text-dark">STUDENT</span>
+            <span class="ms-1 text-sm text-dark">STUDENT</span>
             <?php endif; ?>
         </a>
     </div>
@@ -27,7 +27,7 @@ $current_page = $_GET['page'] ?? 'home';
             <!-- Dashboard -->
             <li class="nav-item">
                 <a class="nav-link <?= ($current_page == 'home') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                   href="index.php?page=home">
+                    href="index.php?page=home">
                     <i class="material-symbols-rounded opacity-5">dashboard</i>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
@@ -35,88 +35,89 @@ $current_page = $_GET['page'] ?? 'home';
 
             <?php if($_SESSION['login_user_type'] == 1): ?>
 
-                <li class="nav-item">
-                    <a class="nav-link <?= ($current_page == 'list_user') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                       href="index.php?page=list_user">
-                        <i class="material-symbols-rounded opacity-5">list</i>
-                        <span class="nav-link-text ms-1">Users</span>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link <?= ($current_page == 'list_user') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                    href="index.php?page=list_user">
+                    <i class="material-symbols-rounded opacity-5">list</i>
+                    <span class="nav-link-text ms-1">Users</span>
+                </a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link <?= ($current_page == 'new_user') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                       href="index.php?page=new_user">
-                        <i class="material-symbols-rounded opacity-5">person_add</i>
-                        <span class="nav-link-text ms-1">Add User</span>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link <?= ($current_page == 'new_user') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                    href="index.php?page=new_user">
+                    <i class="material-symbols-rounded opacity-5">person_add</i>
+                    <span class="nav-link-text ms-1">Add User</span>
+                </a>
+            </li>
 
             <?php endif; ?>
 
             <?php if($_SESSION['login_user_type'] == 3): ?>
-                <li class="nav-item">
-                    <a class="nav-link <?= ($current_page == 'courses') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                       href="index.php?page=courses">
-                        <i class="material-symbols-rounded opacity-5">library_add</i>
-                        <span class="nav-link-text ms-1">Enroll</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= ($current_page == 'enrolled_courses') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                       href="index.php?page=enrolled_courses">
-                        <i class="material-symbols-rounded opacity-5">list</i>
-                        <span class="nav-link-text ms-1">Enrolled Courses</span>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link <?= ($current_page == 'courses') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                    href="index.php?page=courses">
+                    <i class="material-symbols-rounded opacity-5">library_add</i>
+                    <span class="nav-link-text ms-1">Enroll</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <?= ($current_page == 'enrolled_courses') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                    href="index.php?page=enrolled_courses">
+                    <i class="material-symbols-rounded opacity-5">list</i>
+                    <span class="nav-link-text ms-1">Enrolled Courses</span>
+                </a>
+            </li>
             <?php endif; ?>
 
             <?php if($_SESSION['login_user_type'] == 1 || $_SESSION['login_user_type'] == 2): ?>
 
-                <li class="nav-item">
-                    <a class="nav-link <?= ($current_page == 'course') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                       href="index.php?page=course">
-                        <i class="material-symbols-rounded opacity-5">table_view</i>
-                        <span class="nav-link-text ms-1">Courses</span>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link <?= ($current_page == 'course') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                    href="index.php?page=course">
+                    <i class="material-symbols-rounded opacity-5">table_view</i>
+                    <span class="nav-link-text ms-1">Courses</span>
+                </a>
+            </li>
 
             <?php endif; ?>
 
             <?php if($_SESSION['login_user_type'] == 2): ?>
 
-                <li class="nav-item">
-                    <a class="nav-link <?= ($current_page == 'new_course') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                       href="index.php?page=new_course">
-                        <i class="material-symbols-rounded opacity-5">add_box</i>
-                        <span class="nav-link-text ms-1">Add Course</span>
-                    </a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link <?= ($current_page == 'new_course') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                    href="index.php?page=new_course">
+                    <i class="material-symbols-rounded opacity-5">add_box</i>
+                    <span class="nav-link-text ms-1">Add Course</span>
+                </a>
+            </li>
 
             <?php endif; ?>
 
             <li class="nav-item">
                 <a class="nav-link <?= ($current_page == 'Q-A') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                   href="index.php?page=Q-A">
+                    href="index.php?page=Q-A">
                     <i class="material-symbols-rounded opacity-5">chat</i>
                     <span class="nav-link-text ms-1">CHAT / Q&A</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link <?= ($current_page == 'send_notifications') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                   href="index.php?page=send_notifications">
-                    <i class="material-symbols-rounded opacity-5">notifications</i>
-                    <span class="nav-link-text ms-1">Send Notifications</span>
-                </a>
-            </li>
-
+            <?php if($_SESSION['login_user_type'] == 1): ?>
+                <li class="nav-item">
+                    <a class="nav-link <?= ($current_page == 'send_notifications') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                        href="index.php?page=send_notifications">
+                        <i class="material-symbols-rounded opacity-5">notifications</i>
+                        <span class="nav-link-text ms-1">Send Notifications</span>
+                    </a>
+                </li>
+            <?php endif; ?>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark opacity-5">Account Pages</h6>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link <?= ($current_page == 'profile') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-                   href="index.php?page=profile">
+                    href="index.php?page=profile">
                     <i class="material-symbols-rounded opacity-5">person</i>
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
