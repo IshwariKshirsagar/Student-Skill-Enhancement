@@ -73,6 +73,8 @@ th.sort-desc::after {
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./ajax.js"></script>
         <?php
             $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             if($page == "home"){
@@ -355,8 +357,8 @@ th.sort-desc::after {
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="assets/js/material-dashboard.min.js?v=3.2.0"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./ajax.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./ajax.js"></script> -->
 </body>
 
 </html>
