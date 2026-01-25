@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2026 at 09:02 AM
+-- Generation Time: Jan 25, 2026 at 09:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -137,6 +137,45 @@ INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Desc
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notes`
+--
+
+CREATE TABLE `notes` (
+  `notes_id` int(11) NOT NULL,
+  `notes_name` varchar(200) NOT NULL,
+  `notes_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notes`
+--
+
+INSERT INTO `notes` (`notes_id`, `notes_name`, `notes_price`) VALUES
+(1, 'Java Notes', 500);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project`
+--
+
+CREATE TABLE `project` (
+  `project_id` int(11) NOT NULL,
+  `project_name` varchar(200) NOT NULL,
+  `project_language` varchar(200) NOT NULL,
+  `project_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`project_id`, `project_name`, `project_language`, `project_price`) VALUES
+(1, 'Library Management System', 'JAVA', 5000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `studentcourseregistered`
 --
 
@@ -155,6 +194,30 @@ INSERT INTO `studentcourseregistered` (`id`, `course_id`, `user_id`) VALUES
 (4, 4, 26),
 (5, 2, 5),
 (8, 6, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studentnotesregistered`
+--
+
+CREATE TABLE `studentnotesregistered` (
+  `id` int(11) NOT NULL,
+  `notes_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studentprojectregistered`
+--
+
+CREATE TABLE `studentprojectregistered` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -252,12 +315,40 @@ ALTER TABLE `course_videos`
   ADD KEY `idx_course_videos_course` (`course_id`);
 
 --
+-- Indexes for table `notes`
+--
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`notes_id`);
+
+--
+-- Indexes for table `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`project_id`);
+
+--
 -- Indexes for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
   ADD PRIMARY KEY (`id`),
   ADD KEY `course_id` (`course_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `studentnotesregistered`
+--
+ALTER TABLE `studentnotesregistered`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notes_id` (`notes_id`),
+  ADD KEY `idx_student_id` (`student_id`);
+
+--
+-- Indexes for table `studentprojectregistered`
+--
+ALTER TABLE `studentprojectregistered`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `project_id` (`project_id`);
 
 --
 -- Indexes for table `system_settings`
@@ -300,10 +391,34 @@ ALTER TABLE `course_videos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `notes`
+--
+ALTER TABLE `notes`
+  MODIFY `notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `project`
+--
+ALTER TABLE `project`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `studentnotesregistered`
+--
+ALTER TABLE `studentnotesregistered`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `studentprojectregistered`
+--
+ALTER TABLE `studentprojectregistered`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -346,6 +461,20 @@ ALTER TABLE `course_videos`
 ALTER TABLE `studentcourseregistered`
   ADD CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `course_database` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users_database` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `studentnotesregistered`
+--
+ALTER TABLE `studentnotesregistered`
+  ADD CONSTRAINT `fk_studentnotes_student` FOREIGN KEY (`student_id`) REFERENCES `users_database` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notes_id` FOREIGN KEY (`notes_id`) REFERENCES `notes` (`notes_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `studentprojectregistered`
+--
+ALTER TABLE `studentprojectregistered`
+  ADD CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `users_database` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
