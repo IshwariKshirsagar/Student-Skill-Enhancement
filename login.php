@@ -2,15 +2,16 @@
 session_start();
 include('db_connect.php');
 
-/* ==============================
-   GOOGLE DRIVE CONFIG
-================================ */
-$FOLDER_ID = "1HSZQ4ltB0c56bLTbo7RrFQXng8gF6gQP";
-$API_KEY  = "AIzaSyD6_DpXQ23gKtjgDzKJnNtPKsPAhOBZPZU"; // 🔴 REPLACE THIS
+if (!isset($_SESSION['system'])) {
+    $system = $conn->query("SELECT * FROM system_settings")->fetch_array();
+    foreach ($system as $k => $v) {
+        $_SESSION['system'][$k] = $v;
+    }
+}
 
-/* ==============================
-   CHECK DRIVE FOLDER
-================================ */
+$FOLDER_ID = "1HSZQ4ltB0c56bLTbo7RrFQXng8gF6gQP";
+$API_KEY  = "AIzaSyD6_DpXQ23gKtjgDzKJnNtPKsPAhOBZPZU"; 
+
 $driveUrl = "https://www.googleapis.com/drive/v3/files?q='"
     . $FOLDER_ID .
     "'+in+parents&fields=files(id)&key="
@@ -25,22 +26,20 @@ if ($response === false) {
 $data = json_decode($response, true);
 $fileCount = count($data['files'] ?? []);
 
-/* ==============================
-   RESTRICT LOGIN IF EMPTY
-================================ */
+
 if ($fileCount === 0) {
     ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Restricted Access</title>
+        <title><?php echo $_SESSION['system']['project_ra']; ?></title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body class="bg-dark d-flex justify-content-center align-items-center vh-100">
         <div class="alert alert-danger text-center p-4 shadow-lg">
-            <h4 class="mb-2">🚫 Admin Restricted Login Access</h4>
-            <p class="mb-0">Login is currently disabled by administrator.</p>
+            <h4 class="mb-2"><?php echo $_SESSION['system']['project_ra']; ?></h4>
+            <p class="mb-0"><?php echo $_SESSION['system']['project_login_d']; ?></p>
         </div>
     </body>
     </html>
@@ -48,19 +47,6 @@ if ($fileCount === 0) {
     exit;
 }
 
-/* ==============================
-   SYSTEM SETTINGS
-================================ */
-if (!isset($_SESSION['system'])) {
-    $system = $conn->query("SELECT * FROM system_settings")->fetch_array();
-    foreach ($system as $k => $v) {
-        $_SESSION['system'][$k] = $v;
-    }
-}
-
-/* ==============================
-   IF ALREADY LOGGED IN
-================================ */
 if (isset($_SESSION['login_user_id'])) {
     header("location:index.php?page=home");
     exit;
@@ -72,12 +58,9 @@ if (isset($_SESSION['login_user_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-
     <link rel="icon" href="./assets/images/favicon.png" type="image/png">
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
