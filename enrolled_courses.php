@@ -93,7 +93,7 @@
                 <th onclick="sortTable(2)">Course Type</th>
                 <th onclick="sortTable(3)">Course Owner</th>
                 <th>View</th>
-                <th>Action</th>
+                <!-- <th>Action</th> -->
             </tr>
         </thead>
 
@@ -138,12 +138,12 @@
                         </button>
                     </a>
                 </td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-danger delete_course"
-                        data-id="<?php echo $row['course_id']; ?>">
-                        Delete
+                <!-- <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-danger remove_course"
+                        data-id="<?php //echo $row['course_id']; ?>">
+                        Remove
                     </button>
-                </td>
+                </td> -->
             </tr>
             <?php endwhile; ?>
         </tbody>

@@ -130,3 +130,34 @@
         </div> 
     <?php endif; ?>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).on('click', '.delete_course', function () {
+
+    const courseId = $(this).data('id');
+
+    if (!confirm("Are you sure you want to delete this course?")) {
+        return;
+    }
+
+    $.ajax({
+        url: "delete_course.php",
+        method: "POST",
+        data: { course_id: courseId },
+        success: function (response) {
+            response = response.trim();
+
+            if (response === "1") {
+                alert("Course deleted successfully");
+                location.reload();
+            } else if (response === "2") {
+                alert("Unauthorized action");
+            } else {
+                alert("Delete failed");
+            }
+        }
+    });
+});
+</script>
