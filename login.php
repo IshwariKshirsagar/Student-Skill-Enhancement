@@ -1,163 +1,172 @@
+<?php
+session_start();
+include('db_connect.php');
+
+/* ==============================
+   GOOGLE DRIVE CONFIG
+================================ */
+$FOLDER_ID = "1HSZQ4ltB0c56bLTbo7RrFQXng8gF6gQP";
+$API_KEY  = "AIzaSyD6_DpXQ23gKtjgDzKJnNtPKsPAhOBZPZU"; // 🔴 REPLACE THIS
+
+/* ==============================
+   CHECK DRIVE FOLDER
+================================ */
+$driveUrl = "https://www.googleapis.com/drive/v3/files?q='"
+    . $FOLDER_ID .
+    "'+in+parents&fields=files(id)&key="
+    . $API_KEY;
+
+$response = @file_get_contents($driveUrl);
+
+if ($response === false) {
+    die("Unable to verify Drive access. Please try again later.");
+}
+
+$data = json_decode($response, true);
+$fileCount = count($data['files'] ?? []);
+
+/* ==============================
+   RESTRICT LOGIN IF EMPTY
+================================ */
+if ($fileCount === 0) {
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Restricted Access</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-dark d-flex justify-content-center align-items-center vh-100">
+        <div class="alert alert-danger text-center p-4 shadow-lg">
+            <h4 class="mb-2">🚫 Admin Restricted Login Access</h4>
+            <p class="mb-0">Login is currently disabled by administrator.</p>
+        </div>
+    </body>
+    </html>
+    <?php
+    exit;
+}
+
+/* ==============================
+   SYSTEM SETTINGS
+================================ */
+if (!isset($_SESSION['system'])) {
+    $system = $conn->query("SELECT * FROM system_settings")->fetch_array();
+    foreach ($system as $k => $v) {
+        $_SESSION['system'][$k] = $v;
+    }
+}
+
+/* ==============================
+   IF ALREADY LOGGED IN
+================================ */
+if (isset($_SESSION['login_user_id'])) {
+    header("location:index.php?page=home");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./assets/images/favicon.png" type="image/png">
     <title>Login Page</title>
-    <!-- Bootstrap CSS -->
+
+    <link rel="icon" href="./assets/images/favicon.png" type="image/png">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <style>
-    body {
-        background-image: url('assets/background/background.png');
-        /* Replace with your image path */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        /* Semi-transparent black */
-        backdrop-filter: blur(10px);
-        /* Blur effect */
-        -webkit-backdrop-filter: blur(10px);
-        /* Safari support */
-    }
-
-    .login-box {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .login-card-body {
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .login-logo {
-        font-family: 'Poppins', sans-serif; /* Modern font */
-    }
-
-    .logo-link {
-        font-size: 2.5rem;
-        font-weight: bold;
-        position: relative;
-        text-transform: uppercase;
-        display: inline-block;
-        color: #fff;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
-                     0 0 20px rgba(255, 215, 0, 0.8),
-                     0 0 30px rgba(255, 165, 0, 0.9);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .logo-link:hover {
-        transform: scale(1.1);
-        text-shadow: 0 0 15px rgba(255, 255, 255, 1),
-                     0 0 25px rgba(255, 215, 0, 1),
-                     0 0 35px rgba(255, 165, 0, 1),
-                     0 0 50px rgba(255, 69, 0, 1);
-    }
-
-    /* Additional hover effect for the logo text */
-    .logo-link:hover .logo-text {
-        animation: glow 1.5s infinite alternate;
-    }
-
-    @keyframes glow {
-        from {
-            color: #FFD700; /* Gold */
+        body {
+            background-image: url('assets/background/background.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        to {
-            color: #FF4500; /* Orange-Red */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
         }
-    }
+        .login-box {
+            position: relative;
+            z-index: 2;
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-card-body {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .logo-link {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px gold;
+        }
     </style>
-
 </head>
-    <?php
-        session_start();
-        include('db_connect.php');
-        ob_start();
-        if(!isset($_SESSION['system'])){
 
-            $system = $conn->query("SELECT * FROM system_settings")->fetch_array();
-            foreach($system as $k => $v){
-            $_SESSION['system'][$k] = $v;
-            }
-        }
-        ob_end_flush();
-    ?>
-    <?php
-        if(isset($_SESSION['login_user_id']))
-            header("location:index.php?page=home");
-    ?>
 <body>
-    <div class="overlay"></div>
-    <div class="login-box">
+
+<div class="overlay"></div>
+
+<div class="login-box">
     <div class="login-logo text-center mb-4">
-    <a href="#" class="text-white text-decoration-none logo-link">
-        <span class="logo-text"><?php echo $_SESSION['system']['project_name'] ?></span>
-    </a>
-</div>
-        <div class="card">
-            <div class="card-body login-card-body">
-                <form action="" id="login-form">
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <input type="email" id="email" class="form-control" name="email" required placeholder="Email">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            </div>
+        <a href="#" class="logo-link text-decoration-none">
+            <?php echo $_SESSION['system']['project_name']; ?>
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body login-card-body">
+            <form id="login-form">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <input type="email" id="email" class="form-control" placeholder="Email" required>
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="input-group">
+                        <input type="password" id="password" class="form-control" placeholder="Password" required>
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label class="form-check-label">Remember Me</label>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <input type="password" id="password" class="form-control" name="password" required placeholder="Password">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            </div>
-                        </div>
+                    <div class="col-4">
+                        <button id="signin" class="btn btn-primary w-100">Sign In</button>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-8">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="remember">
-                                <label for="remember" class="form-check-label">Remember Me</label>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" id="signin" class="btn btn-primary btn-block w-100">Sign In</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="ajax.js"></script>
+</div>
 
-   
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="ajax.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-
 </html>

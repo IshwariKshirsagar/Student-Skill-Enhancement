@@ -111,6 +111,7 @@ $current_page = $_GET['page'] ?? 'home';
                     </a>
                 </li>
             <?php endif; ?>
+            
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark opacity-5">Account Pages</h6>
             </li>
