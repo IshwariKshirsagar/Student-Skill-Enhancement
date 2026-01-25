@@ -2,6 +2,7 @@
 include 'db_connect.php';
 
 $course_id = isset($_GET['course_id']) ? (int)$_GET['course_id'] : 0;
+$course_access = isset($_GET['course_access']) ? (int)$_GET['course_access'] : "allowed";
 
 $qry = $conn->query("
     SELECT * 
@@ -66,8 +67,10 @@ $qry = $conn->query("
                     <th>Thumbnail</th>
                     <th>Video Title</th>
                     <th>Description</th>
-                    <th>Status</th>
-                    <th>Watch</th>
+                    <?php if ($course_access == "allowed"): ?>
+                        <th>Status</th>
+                        <th>Watch</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
 
@@ -88,21 +91,21 @@ $qry = $conn->query("
                 <td><b><?= htmlspecialchars($row['VideoTitle']) ?></b></td>
 
                 <td><?= htmlspecialchars($row['Description']) ?></td>
-
-                <td class="text-center">
-                    <?php if ($row['Status'] == 1): ?>
-                        <span class="badge badge-watched">Watched</span>
-                    <?php else: ?>
-                        <span class="badge badge-remaining">Remaining</span>
-                    <?php endif; ?>
-                </td>
-
-                <td class="text-center">
-                    <a href="./index.php?page=playvideo&id=<?= $row['id'] ?>&course_id=<?= $course_id ?>"
-                       class="btn btn-sm btn-primary">
+                <?php if ($course_access == "allowed"): ?>
+                    <td class="text-center">
+                        <?php if ($row['Status'] == 1): ?>
+                            <span class="badge badge-watched">Watched</span>
+                        <?php else: ?>
+                            <span class="badge badge-remaining">Remaining</span>
+                        <?php endif; ?>
+                    </td>
+                    <td class="text-center">
+                        <a href="./index.php?page=playvideo&id=<?= $row['id'] ?>&course_id=<?= $course_id ?>"
+                        class="btn btn-sm btn-primary">
                         View
                     </a>
                 </td>
+                <?php endif; ?>
             </tr>
             <?php endwhile; else: ?>
                 <tr>

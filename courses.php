@@ -123,7 +123,7 @@ $totalCourses = $row['total_course'];
                 <td><b><?= htmlspecialchars($row['owner_name']) ?></b></td>
 
                 <td>
-                    <a href="./index.php?page=viewcourse&course_id=<?= $row['course_id'] ?>"
+                    <a href="./index.php?page=viewcourse&course_access=restricted&course_id=<?= $row['course_id'] ?>"
                         class="btn btn-sm btn-info">
                         View
                     </a>
