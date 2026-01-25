@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2026 at 07:04 AM
+-- Generation Time: Jan 25, 2026 at 09:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -81,8 +81,7 @@ INSERT INTO `course_database` (`course_id`, `course_name`, `course_type`, `cours
 (3, 'Android Programming', 5, 19, '2025-12-15 08:20:40'),
 (4, 'Elements of Electrical Engineering', 2, 16, '2025-12-15 08:33:52'),
 (5, 'Thermodynamics', 6, 22, '2025-12-15 09:54:17'),
-(6, 'PHP', 1, 17, '2025-12-16 03:50:02'),
-(7, 'Javascript', 1, 16, '2026-01-16 14:05:26');
+(6, 'PHP', 1, 17, '2025-12-16 03:50:02');
 
 -- --------------------------------------------------------
 
@@ -133,8 +132,7 @@ INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Desc
 (5, 1, '../thumbnail/1768383123_Screenshot 2026-01-11 090447.png', 'Title 4', 'desc 4', '../course_videos/1768383123_Golmaal.Returns.720p.themoviesflix.in.mkv', 1),
 (6, 1, '../thumbnail/1768383123_Screenshot 2026-01-11 090447.png', 'Title 5', 'Desc 5', '../course_videos/1768385065_ssvid.net--Doremon-New-Latest-episode-in-HindiDoremon-New-Episode-In-Hindi_480p.mp4', 0),
 (9, 4, '../thumbnail/1768388481_YO.png', 'T1', 'D1', '../course_videos/1768388481_ssvid.net--Doremon-New-Latest-episode-in-HindiDoremon-New-Episode-In-Hindi_480p.mp4', 1),
-(10, 4, '../thumbnail/1768407591_Screenshot (14).png', 'T7', 'D7', '../course_videos/1768407591_videoplayback.mp4', 1),
-(11, 7, '../thumbnail/1768572388_Screenshot (27).png', 'Video 1', 'Desc 1', '../course_videos/1768572388_watchanimeworld.mp4', 0);
+(10, 4, '../thumbnail/1768407591_Screenshot (14).png', 'T7', 'D7', '../course_videos/1768407591_videoplayback.mp4', 1);
 
 -- --------------------------------------------------------
 
@@ -156,8 +154,7 @@ INSERT INTO `studentcourseregistered` (`id`, `course_id`, `user_id`) VALUES
 (2, 1, 5),
 (4, 4, 26),
 (5, 2, 5),
-(8, 6, 5),
-(9, 2, 26);
+(8, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -220,8 +217,7 @@ INSERT INTO `users_database` (`user_id`, `name`, `email`, `password`, `user_type
 (17, 'Vinod Kumar', 'vinodkumar@gmail.com', 'vinodkumar@gmail.com', 2, '+919999999999', 'Latur', '', '', '', '', '', '', '', '2025-01-12 14:21:47'),
 (19, 'Tushar Gawande', 'tushargawande@gmail.com', 'tushargawande@gmail.com', 2, '+919022361966', 'Chhatrapati Sambhajinagar', '', '', '', '', '', '', '', '2025-02-20 14:08:06'),
 (22, 'Kajal Patil', 'kajalpatil@gmail.com', 'kajalpatil@gmail.com', 2, '+916666666666', 'Mumbai', '', '', '', '', '', '', '', '2025-12-15 15:23:05'),
-(26, 'Rupa', 'rupasharma@gmail.com', 'rupasharma@gmail.com', 3, '+918292829282', 'Solapur', '', '', '', '', '', '', '', '2025-12-19 22:37:42'),
-(27, 'Sharma', 'sharma@gmail.com', 'sharma@gmail.com', 3, '+919999999999', 'Dharashiv', '', '', '', '', '', '', '', '2026-01-16 19:31:32');
+(26, 'Rupa', 'rupasharma@gmail.com', 'rupasharma@gmail.com', 3, '+918292829282', 'Solapur', '', '', '', '', '', '', '', '2025-12-19 22:37:42');
 
 --
 -- Indexes for dumped tables
@@ -289,7 +285,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT for table `course_database`
 --
 ALTER TABLE `course_database`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `course_type`
@@ -307,7 +303,7 @@ ALTER TABLE `course_videos`
 -- AUTO_INCREMENT for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
