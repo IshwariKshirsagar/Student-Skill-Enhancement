@@ -12,16 +12,17 @@ include 'db_connect.php';
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
 <style>
     #searchInput {
-        border: 1px solid #666;   /* light black */
+        border: 1px solid #666;
         border-radius: 4px;
         padding: 6px 10px;
     }
 
     #searchInput:focus {
-        border-color: #000;       /* darker on focus */
-        box-shadow: none;         /* remove blue glow */
+        border-color: #000;
+        box-shadow: none;
         outline: none;
     }
 </style>
@@ -32,6 +33,14 @@ include 'db_connect.php';
 <body>
 
 <div class="container-fluid mt-4"> 
+    <div class="card-header">
+        <div class="card-tools">
+            <a class="btn btn-block btn-sm btn-primary btn-flat" href="./index.php?page=new_notes">
+                <i class="fa fa-plus"></i> Buy New Notes
+            </a>
+        </div>
+    </div>
+
     <div class="card card-outline card-success">     
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title mb-0">Notes Management</h4>
@@ -53,19 +62,44 @@ include 'db_connect.php';
                     </thead>
                     <tbody>
                         <?php
-                        $qry = $conn->query("
-                            SELECT 
-                                n.notes_id,
-                                n.notes_name,
-                                n.notes_price,
-                                u.name AS owner_name,
-                                COUNT(snr.student_id) AS total_purchased
-                            FROM notes n
-                            JOIN users_database u ON n.notes_owner_id = u.user_id
-                            LEFT JOIN studentnotesregistered snr 
-                                ON snr.notes_id = n.notes_id
-                            GROUP BY n.notes_id
-                        ");
+                        if ($_SESSION['login_user_type'] == 3) {
+
+                            // ✅ STUDENT → fetch ONLY purchased notes
+                            $qry = $conn->query("
+                                SELECT 
+                                    n.notes_id,
+                                    n.notes_name,
+                                    n.notes_price,
+                                    u.name AS owner_name,
+                                    COUNT(snr_all.student_id) AS total_purchased
+                                FROM studentnotesregistered snr
+                                INNER JOIN notes n 
+                                    ON snr.notes_id = n.notes_id
+                                INNER JOIN users_database u 
+                                    ON n.notes_owner_id = u.user_id
+                                LEFT JOIN studentnotesregistered snr_all
+                                    ON snr_all.notes_id = n.notes_id
+                                WHERE snr.student_id = " . (int)$_SESSION['login_user_id'] . "
+                                GROUP BY n.notes_id
+                            ");
+
+                        } else {
+
+                            // ✅ ADMIN / OTHERS → fetch all notes
+                            $qry = $conn->query("
+                                SELECT 
+                                    n.notes_id,
+                                    n.notes_name,
+                                    n.notes_price,
+                                    u.name AS owner_name,
+                                    COUNT(snr.student_id) AS total_purchased
+                                FROM notes n
+                                JOIN users_database u ON n.notes_owner_id = u.user_id
+                                LEFT JOIN studentnotesregistered snr 
+                                    ON snr.notes_id = n.notes_id
+                                GROUP BY n.notes_id
+                            ");
+                        }
 
                         while ($row = $qry->fetch_assoc()):
                         ?>
@@ -75,9 +109,7 @@ include 'db_connect.php';
                             <td class="text-center"><?php echo $row['owner_name']; ?></td>
                             <td class="text-center"><?php echo $row['notes_price']; ?></td>
                             <td class="text-center">
-                                <!-- <span class="badge badge-light text-dark font-weight-bold"> -->
-                                    <?php echo $row['total_purchased']; ?> Peoples
-                                </span>
+                                <?php echo $row['total_purchased']; ?> Peoples
                             </td>
                             <td class="text-center">
                                 <a href="index.php?page=view_notes_pdf&id=<?php echo $row['notes_id']; ?>" 
