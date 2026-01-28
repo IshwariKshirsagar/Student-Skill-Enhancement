@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2026 at 09:32 AM
+-- Generation Time: Jan 28, 2026 at 11:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -142,6 +142,7 @@ INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Desc
 
 CREATE TABLE `notes` (
   `notes_id` int(11) NOT NULL,
+  `notes_owner_id` int(11) NOT NULL,
   `notes_name` varchar(200) NOT NULL,
   `notes_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -150,8 +151,8 @@ CREATE TABLE `notes` (
 -- Dumping data for table `notes`
 --
 
-INSERT INTO `notes` (`notes_id`, `notes_name`, `notes_price`) VALUES
-(1, 'Java Notes', 500);
+INSERT INTO `notes` (`notes_id`, `notes_owner_id`, `notes_name`, `notes_price`) VALUES
+(1, 1, 'Java Notes', 500);
 
 -- --------------------------------------------------------
 
@@ -318,7 +319,8 @@ ALTER TABLE `course_videos`
 -- Indexes for table `notes`
 --
 ALTER TABLE `notes`
-  ADD PRIMARY KEY (`notes_id`);
+  ADD PRIMARY KEY (`notes_id`),
+  ADD KEY `fk_notes_owner` (`notes_owner_id`);
 
 --
 -- Indexes for table `project`
@@ -454,6 +456,12 @@ ALTER TABLE `course_database`
 --
 ALTER TABLE `course_videos`
   ADD CONSTRAINT `fk_course_videos_course` FOREIGN KEY (`course_id`) REFERENCES `course_database` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `notes`
+--
+ALTER TABLE `notes`
+  ADD CONSTRAINT `fk_notes_owner` FOREIGN KEY (`notes_owner_id`) REFERENCES `users_database` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `studentcourseregistered`
