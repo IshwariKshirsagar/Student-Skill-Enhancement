@@ -31,8 +31,8 @@ include 'db_connect.php';
 </head>
 <body>
 
-<div class="container-fluid mt-4">
-    <div class="card card-outline card-success">
+<div class="container-fluid mt-4"> 
+    <div class="card card-outline card-success">     
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="card-title mb-0">Notes Management</h4>
             <input type="text" id="searchInput" class="form-control form-control-sm w-25" placeholder="Search notes...">
@@ -76,13 +76,13 @@ include 'db_connect.php';
                             <td class="text-center"><?php echo $row['notes_price']; ?></td>
                             <td class="text-center">
                                 <!-- <span class="badge badge-light text-dark font-weight-bold"> -->
-                                    <?php echo $row['total_purchased']; ?>
+                                    <?php echo $row['total_purchased']; ?> Peoples
                                 </span>
                             </td>
                             <td class="text-center">
                                 <a href="index.php?page=view_notes_pdf&id=<?php echo $row['notes_id']; ?>" 
                                    class="btn btn-sm btn-primary">
-                                    <i class="fa fa-file-pdf"></i> View
+                                    <i class="fa fa-file-pdf" style="font-size: 16px;"></i> View
                                 </a>
                             </td>
                         </tr>

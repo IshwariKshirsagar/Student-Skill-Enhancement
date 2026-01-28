@@ -46,7 +46,7 @@ $current_page = $_GET['page'] ?? 'home';
             <?php endif; ?>
 
             <li class="nav-item">
-                <a class="nav-link <?= ($current_page == 'notes') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                <a class="nav-link <?= ($current_page == 'notes' || $current_page == 'view_notes_pdf') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
                     href="index.php?page=notes">
                     <i class="material-symbols-rounded opacity-5">menu_book</i>
                     <span class="nav-link-text ms-1">Notes</span>
