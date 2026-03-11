@@ -35,16 +35,29 @@ $qry = $conn->query("
     background-color: #ffc107;
     color: #000;
 }
+#videoTable td, 
+#videoTable th {
+    white-space: normal;      /* allow text to wrap */
+    word-wrap: break-word;    /* break long words */
+}
 </style>
 </head>
 
 <body class="bg-light">
 
 <div class="container mt-4">
-
+<?php if ($course_access == "allowed"): ?>
+<a href="certificate.php?course_id=<?= $course_id ?>" 
+   class="btn btn-sm btn-success mr-2"
+   style="white-space:nowrap;">
+   <i class="fa fa-certificate mr-1"></i> Download Certificate
+</a>
+<?php endif; ?>
 <div class="card">
+    
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Course Videos</h5>
+        
 
         <div class="d-flex">
             <input type="text" id="videoSearch"

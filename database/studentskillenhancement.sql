@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2026 at 11:01 AM
+-- Generation Time: Mar 11, 2026 at 11:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -127,12 +127,20 @@ CREATE TABLE `course_videos` (
 --
 
 INSERT INTO `course_videos` (`id`, `course_id`, `Thumbnail`, `VideoTitle`, `Description`, `video`, `Status`) VALUES
-(2, 1, '../thumbnail/1768382294_Yogesh.png', 'T1', 'Desc2', '../course_videos/1768382294_watchanimeworld.mp4', 1),
-(3, 1, '../thumbnail/1768382525_Screenshot 2025-08-26 023737.png', 'AJP', 'Desc2', '../course_videos/1768382525_shinchan new episode in hindi without zoom effect #25095095.mp4', 1),
-(5, 1, '../thumbnail/1768383123_Screenshot 2026-01-11 090447.png', 'Title 4', 'desc 4', '../course_videos/1768383123_Golmaal.Returns.720p.themoviesflix.in.mkv', 1),
-(6, 1, '../thumbnail/1768383123_Screenshot 2026-01-11 090447.png', 'Title 5', 'Desc 5', '../course_videos/1768385065_ssvid.net--Doremon-New-Latest-episode-in-HindiDoremon-New-Episode-In-Hindi_480p.mp4', 0),
-(9, 4, '../thumbnail/1768388481_YO.png', 'T1', 'D1', '../course_videos/1768388481_ssvid.net--Doremon-New-Latest-episode-in-HindiDoremon-New-Episode-In-Hindi_480p.mp4', 1),
-(10, 4, '../thumbnail/1768407591_Screenshot (14).png', 'T7', 'D7', '../course_videos/1768407591_videoplayback.mp4', 1);
+(2, 1, '../thumbnail/Java1.jpeg', '\nIntroduction to Java + Installing Java JDK and IntelliJ IDEA for Java', 'Installing Java JDK: This Java tutorial for beginners will teach you java programming from scratch. This complete java course will help you master all the concepts you need to learn in Java. We will install java, JDK and IntelliJ IDEA IDE for Java', '../course_videos/Introduction to Java Installing Java JDK and IntelliJ IDEA for Java.mp4', 1),
+(3, 1, '../thumbnail/Java2.jpeg', '\nBasic Structure of a Java Program: Understanding our First Java Hello World Program', 'Understanding Java hello world Program: This Java tutorial for beginners will teach you java programming from scratch. This complete java course will help you master all the concepts you need to learn in Java. We will understand basic structure of a java program in this video!', '../course_videos/Basic Structure of a Java Program Understanding our First Java Hello World Program.mp4', 1),
+(5, 1, '../thumbnail/Java3.jpeg', 'Java Tutorial Variables and Data Types in Java Programming', 'Java Tutorial (Variables and Data Types): This Java tutorial for beginners will teach you about primitive and non primitive data types in java programming from scratch. This complete java course will help you master all the concepts you need to learn in Java.', '../course_videos/Java Tutorial Variables and Data Types in Java Programming.mp4', 1),
+(6, 1, '../thumbnail/Java4.jpeg', 'Java Tutorial Literals in Java', 'Java Programming tutorial (Literals in Java Programming) - This Java Complete Course video will teach you how to use literals in java in Hindi.\nTopics Discussed includes: Literals in Java, String, Character, Integer, Floating-point, Double and Boolean literals in Java and how to use them with variab', '../course_videos/Java Tutorial Literals in Java.mp4', 1),
+(9, 2, '../thumbnail/Python.jpeg', 'Introduction to Programming & Python  Python Tutorial - Day1', 'Python is one of the most demanded programming languages in the job market. Surprisingly, it is equally easy to learn and master  Python. This Python tutorial for absolute beginners in Hindi series will focus on teaching you Python concepts from the ground up.', '../course_videos/Introduction to Programming & Python  Python Tutorial - Day1.mp4', 1),
+(10, 2, '../thumbnail/Python.jpeg', 'Some Amazing Python Programs - The Power of Python  Python Tutorial - Day2', 'Python is one of the most demanded programming languages in the job market. Surprisingly, it is equally easy to learn and master  Python. This python tutorial for absolute beginners in Hindi series will focus on teaching you python concepts from the ground up. Today we will see some of the mindblowi', '../course_videos/Some Amazing Python Programs - The Power of Python  Python Tutorial - Day2.mp4', 1),
+(12, 3, '../thumbnail/Android1.png', 'Installing Android Studio & Setup  Android Tutorials in Hindi', 'In this video, we will understand Android Application development basics by installing Android Studio and setting up an emulator device.', '../course_videos/Installing Android Studio & Setup  Android Tutorials in Hindi.mp4', 1),
+(13, 3, '../thumbnail/Android2.png', 'Creating Our First Android App (with APK)  Android Tutorials in Hindi', 'In this video, we will see how to create a basic application in android along with APK to install the application to our phone.', '../course_videos/Creating Our First Android App (with APK)  Android Tutorials in Hindi.mp4', 1),
+(14, 4, '../thumbnail/EEC1.png', 'EEC Lecture 1st For MSBTE Diploma 2nd Sem  Free Notes  Question Bank  Best Coaching For Diploma', 'After a lots o request we are now serving our qualitative content for diploma 2nd semester also. We have started a complete new playlist for EEC ( elements of electrical engineering ) subject for 2nd semester computer and electrical department .', '../course_videos/EEC Lecture 1st For MSBTE Diploma 2nd Sem  Free Notes  Question Bank  Best Coaching For Diploma.mp4', 1),
+(15, 4, '../thumbnail/EEC2.png', 'EEC Lecture 2nd For MSBTE Diploma 2nd Sem  Free Notes  Question Bank  Best Coaching For Diploma', 'After a lots o request we are now serving our qualitative content for diploma 2nd semester also. We have started a complete new playlist for EEC ( elements of electrical engineering ) subject for 2nd semester computer and electrical department . ', '../course_videos/EEC Lecture 2nd For MSBTE Diploma 2nd Sem  Free Notes  Question Bank  Best Coaching For Diploma.mp4', 1),
+(16, 5, '../thumbnail/Thermodynamics1.png', 'Thermodynamics 01 Introduction Thermal Equilibrium n Zeroth Law of Thermodynamics', 'Live Classes, Video Lectures, Test Series, Lecturewise notes, topicwise DPP, dynamic Exercise and much more on Physicswallah App.', '../course_videos/Thermodynamics 01 Introduction Thermal Equilibrium n Zeroth Law of Thermodynamics.mp4', 0),
+(17, 5, '../thumbnail/Thermodynamics2.png', 'Thermodynamics 02 (Physics )  Internal Energy  Degree of Freedom Law Of Equipartition Of Energy', 'Live Classes, Video Lectures, Test Series, Lecturewise notes, topicwise DPP, dynamic Exercise and much more on Physicswallah App.', '../course_videos/Thermodynamics 02 (Physics )  Internal Energy  Degree of Freedom Law Of Equipartition Of Energy.mp4', 0),
+(19, 6, '../thumbnail/PHP1.png', 'Installing XAMPP VS Code Environment Setup', 'PHP Tutorials in Hindi', '../course_videos/Installing XAMPP VS Code Environment Setup.mp4', 1),
+(20, 6, '../thumbnail/PHP2.png', 'Creating Our First PHP Website', 'PHP Tutorials in Hindi', '../course_videos/Creating Our First PHP Website.mp4', 1);
 
 -- --------------------------------------------------------
 
@@ -144,15 +152,17 @@ CREATE TABLE `notes` (
   `notes_id` int(11) NOT NULL,
   `notes_owner_id` int(11) NOT NULL,
   `notes_name` varchar(200) NOT NULL,
-  `notes_price` int(11) NOT NULL
+  `notes_price` int(11) NOT NULL,
+  `notes_pdf_link` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `notes`
 --
 
-INSERT INTO `notes` (`notes_id`, `notes_owner_id`, `notes_name`, `notes_price`) VALUES
-(1, 1, 'Java Notes', 500);
+INSERT INTO `notes` (`notes_id`, `notes_owner_id`, `notes_name`, `notes_price`, `notes_pdf_link`) VALUES
+(1, 1, 'Java Notes', 500, '../notes/Data.pdf'),
+(2, 26, 'Android Programming', 300, '../notes/Data.pdf');
 
 -- --------------------------------------------------------
 
@@ -164,15 +174,17 @@ CREATE TABLE `project` (
   `project_id` int(11) NOT NULL,
   `project_name` varchar(200) NOT NULL,
   `project_language` varchar(200) NOT NULL,
-  `project_price` int(11) NOT NULL
+  `project_price` int(11) NOT NULL,
+  `project_link` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`project_id`, `project_name`, `project_language`, `project_price`) VALUES
-(1, 'Library Management System', 'JAVA', 5000);
+INSERT INTO `project` (`project_id`, `project_name`, `project_language`, `project_price`, `project_link`) VALUES
+(1, 'Library Management System', 'JAVA', 5000, '../projects/Data.zip'),
+(2, 'Student Skill Enhancement ', 'HTML,CSS,JS,PHP,BOOTSTRAP', 7000, '../projects/Data.zip');
 
 -- --------------------------------------------------------
 
@@ -208,6 +220,14 @@ CREATE TABLE `studentnotesregistered` (
   `student_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `studentnotesregistered`
+--
+
+INSERT INTO `studentnotesregistered` (`id`, `notes_id`, `student_id`) VALUES
+(1, 2, 5),
+(2, 1, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -219,6 +239,13 @@ CREATE TABLE `studentprojectregistered` (
   `student_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `studentprojectregistered`
+--
+
+INSERT INTO `studentprojectregistered` (`id`, `student_id`, `project_id`) VALUES
+(1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -281,7 +308,8 @@ INSERT INTO `users_database` (`user_id`, `name`, `email`, `password`, `user_type
 (17, 'Vinod Kumar', 'vinodkumar@gmail.com', 'vinodkumar@gmail.com', 2, '+919999999999', 'Latur', '', '', '', '', '', '', '', '2025-01-12 14:21:47'),
 (19, 'Tushar Gawande', 'tushargawande@gmail.com', 'tushargawande@gmail.com', 2, '+919022361966', 'Chhatrapati Sambhajinagar', '', '', '', '', '', '', '', '2025-02-20 14:08:06'),
 (22, 'Kajal Patil', 'kajalpatil@gmail.com', 'kajalpatil@gmail.com', 2, '+916666666666', 'Mumbai', '', '', '', '', '', '', '', '2025-12-15 15:23:05'),
-(26, 'Rupa', 'rupasharma@gmail.com', 'rupasharma@gmail.com', 3, '+918292829282', 'Solapur', '', '', '', '', '', '', '', '2025-12-19 22:37:42');
+(26, 'Rupa', 'rupasharma@gmail.com', 'rupasharma@gmail.com', 3, '+918292829282', 'Solapur', '', '', '', '', '', '', '', '2025-12-19 22:37:42'),
+(28, 'Yogesh Kshirsagar', 'yogeshkshirsagar393@gmail.com', 'yogeshkshirsagar393@gmail.com', 3, '7499665641', 'Dharashiv', '', '', '', '', '', '', '', '2026-02-15 17:13:28');
 
 --
 -- Indexes for dumped tables
@@ -390,19 +418,19 @@ ALTER TABLE `course_type`
 -- AUTO_INCREMENT for table `course_videos`
 --
 ALTER TABLE `course_videos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `studentcourseregistered`
@@ -414,13 +442,13 @@ ALTER TABLE `studentcourseregistered`
 -- AUTO_INCREMENT for table `studentnotesregistered`
 --
 ALTER TABLE `studentnotesregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `studentprojectregistered`
 --
 ALTER TABLE `studentprojectregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -432,7 +460,7 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `users_database`
 --
 ALTER TABLE `users_database`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables
