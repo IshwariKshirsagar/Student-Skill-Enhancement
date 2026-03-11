@@ -78,11 +78,11 @@
         $totalCourses = $row['total_course']; 
     ?>
     <div class="card-header">
-        <div class="card-tools">
+        <!-- <div class="card-tools">
             <a class="btn btn-block btn-sm btn-primary btn-flat" href="./index.php?page=new_course">
                 <i class="fa fa-plus"></i> Add New Course
             </a>
-        </div>
+        </div> -->
     </div>
     <?php if ($totalCourses > 0): ?>
     <table class="table table-hover table-bordered bg-white" id="sortableTable">

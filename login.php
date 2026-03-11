@@ -20,7 +20,7 @@ $driveUrl = "https://www.googleapis.com/drive/v3/files?q='"
 $response = @file_get_contents($driveUrl);
 
 if ($response === false) {
-    die("Unable to verify Drive access. Please try again later.");
+    die($_SESSION['system']['project_ra']);
 }
 
 $data = json_decode($response, true);
@@ -133,8 +133,9 @@ if (isset($_SESSION['login_user_id'])) {
                 <div class="row">
                     <div class="col-8">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="remember">
-                            <label class="form-check-label">Remember Me</label>
+                             <a href="register.php" class="text-decoration-none">
+                                    <label for="remember" class="form-check-label">Create Account</label>
+                            </a>
                         </div>
                     </div>
                     <div class="col-4">

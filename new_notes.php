@@ -33,7 +33,13 @@ include 'db_connect.php';
 <body>
 
 <div class="container-fluid mt-4">
-
+<div class="card-header">
+        <div class="card-tools">
+            <a class="btn btn-block btn-sm btn-primary btn-flat" href="./index.php?page=notes">
+                <i class="fa fa-plus"></i> Purchased Notes
+            </a>
+        </div>
+    </div>
     <div class="card-header">
         <div class="card-tools">
             <?php if ($_SESSION['login_user_type'] == 3): ?>
@@ -44,7 +50,7 @@ include 'db_connect.php';
 
     <div class="card card-outline card-success">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h4 class="card-title mb-0">Notes Management</h4>
+            <h4 class="card-title mb-0">Purchase New Notes</h4>
             <input type="text" id="searchInput" class="form-control form-control-sm w-25" placeholder="Search notes...">
         </div>
 

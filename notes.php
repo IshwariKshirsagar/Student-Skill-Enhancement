@@ -43,7 +43,7 @@ include 'db_connect.php';
 
     <div class="card card-outline card-success">     
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h4 class="card-title mb-0">Notes Management</h4>
+            <h4 class="card-title mb-0">My Notes</h4>
             <input type="text" id="searchInput" class="form-control form-control-sm w-25" placeholder="Search notes...">
         </div>
 

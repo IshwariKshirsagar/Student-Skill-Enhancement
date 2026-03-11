@@ -135,9 +135,9 @@ $totalCourses = $row['total_course'];
                         Enroll
                     </button>
                     <?php else: ?>
-                    <button class="btn btn-sm btn-danger delete_course" data-id="<?= $row['course_id'] ?>">
+                    <!-- <button class="btn btn-sm btn-danger delete_course" data-id="<?= $row['course_id'] ?>">
                         Delete
-                    </button>
+                    </button> -->
                     <?php endif; ?>
                 </td>
             </tr>
