@@ -33,6 +33,7 @@ $current_page = $_GET['page'] ?? 'home';
                 </a>
             </li>
 
+
             <?php if($_SESSION['login_user_type'] == 1): ?>
 
             <li class="nav-item">
@@ -60,6 +61,7 @@ $current_page = $_GET['page'] ?? 'home';
                 </a>
             </li>
 
+            
 
             <li class="nav-item">
                 <a class="nav-link <?= ($current_page == 'courses') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
@@ -76,6 +78,13 @@ $current_page = $_GET['page'] ?? 'home';
                 </a>
             </li>
             <?php endif; ?>
+            <li class="nav-item">
+    <a class="nav-link <?= ($current_page == 'add_notes') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="index.php?page=add_notes">
+        <i class="material-symbols-rounded opacity-5">note_add</i>
+        <span class="nav-link-text ms-1">Add Notes</span>
+    </a>
+</li>
 
             <?php if($_SESSION['login_user_type'] == 1 || $_SESSION['login_user_type'] == 2): ?>
 
