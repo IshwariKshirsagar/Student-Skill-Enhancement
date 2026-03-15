@@ -32,4 +32,4 @@ $insert = $conn->query("
     VALUES ($notes_id, $student_id)
 ");
 
-echo $insert ? 1 : 0;
+echo $insert ? 1 :0;
