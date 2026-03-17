@@ -16,7 +16,6 @@ $user_type = (int)$_SESSION['login_user_type'];
  1 = Admin
  2 = Course Owner
 */
-
 // 🔐 Authorization
 if ($user_type == 1) {
     // Admin can delete any course
