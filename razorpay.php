@@ -36,15 +36,10 @@
 </style>
 
 <div class="payment-container">
-    <h1>Donate For Website Maintaince</h1>
+    <h1>Donate for Poor Student Education</h1>
     <p>Click the button below to proceed with your secure payment.</p>
     <div class="razorpay-button-container">
         <!-- Razorpay Payment Button -->
-        <form>
-            <script src="https://checkout.razorpay.com/v1/payment-button.js" 
-                data-payment_button_id="pl_PixN8fyVA0P4IB" 
-                async> 
-            </script>
-        </form>
+        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SV5r9bTceljh4S" async> </script> </form>
     </div>
 </div>
