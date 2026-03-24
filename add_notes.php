@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     if (move_uploaded_file($tmp, $folder . $filename)) {
         $conn->query("
             INSERT INTO notes (notes_owner_id, notes_name, notes_price, notes_pdf_link)
-            VALUES ('$owner_id', '$notes_name', '$notes_price', '$filename')
+            VALUES ('$owner_id', '$notes_name', '$notes_price', '../notes/$filename')
         ");
         $msg = "success";
     } else {

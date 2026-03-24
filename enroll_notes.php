@@ -1,11 +1,7 @@
 <?php
-session_start();
-include 'db_connect.php';
-
-if (!isset($_SESSION['login_user_id']) || $_SESSION['login_user_type'] != 3) {
-    echo 0;
-    exit;
-}
+// Direct access blocked — use operations/verify_notes_payment.php
+http_response_code(403);
+exit;
 
 if (!isset($_POST['notes_id'])) {
     echo 0;
