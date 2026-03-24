@@ -147,36 +147,72 @@ if (isset($_POST['save_video'])) {
              ADD VIDEO SECTION
              =========================== -->
                 <div id="videoSection" style="display:none;">
-                    <div class="card card-outline card-primary">
-                        <div class="card-header">
-                            <h6 class="mb-0">Add Course Video</h6>
+                    <div class="card" style="border:none; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.10); max-width:640px; margin:0 auto;">
+                        <div class="card-header" style="background:linear-gradient(135deg,#28a745,#20c997); border-radius:16px 16px 0 0; padding:22px 28px 18px; border:none;">
+                            <h5 style="color:#fff; font-weight:700; margin:0;"><i class="fa fa-video mr-2"></i> Add Course Video</h5>
+                            <p style="color:rgba(255,255,255,0.80); font-size:13px; margin:4px 0 0;">Upload a new video lecture for this course.</p>
                         </div>
-                        <div class="card-body">
-                            <form method="POST" enctype="multipart/form-data">
+                        <div class="card-body" style="padding:28px;">
+                            <form method="POST" enctype="multipart/form-data" id="videoUploadForm">
 
+                                <!-- Video Title -->
                                 <div class="form-group">
-                                    <label>Video Title</label>
-                                    <input type="text" name="video_title" class="form-control" required>
+                                    <label style="font-weight:600; font-size:13px; color:#444; text-transform:uppercase; letter-spacing:0.4px;">
+                                        <i class="fa fa-heading mr-1 text-success"></i> Video Title
+                                    </label>
+                                    <input type="text" name="video_title" class="form-control" placeholder="e.g. Introduction to Variables" required
+                                        style="border:1.5px solid #dee2e6; border-radius:8px; padding:10px 14px; font-size:14px; box-shadow:none;">
                                 </div>
 
+                                <!-- Description -->
                                 <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea name="description" class="form-control" rows="3" required></textarea>
+                                    <label style="font-weight:600; font-size:13px; color:#444; text-transform:uppercase; letter-spacing:0.4px;">
+                                        <i class="fa fa-align-left mr-1 text-success"></i> Description
+                                    </label>
+                                    <textarea name="description" class="form-control" rows="3" placeholder="Brief description of this video..." required
+                                        style="border:1.5px solid #dee2e6; border-radius:8px; padding:10px 14px; font-size:14px; box-shadow:none; resize:vertical;"></textarea>
                                 </div>
 
+                                <!-- Thumbnail Upload -->
                                 <div class="form-group">
-                                    <label>Thumbnail</label>
-                                    <input type="file" name="thumbnail" class="form-control-file" required>
+                                    <label style="font-weight:600; font-size:13px; color:#444; text-transform:uppercase; letter-spacing:0.4px;">
+                                        <i class="fa fa-image mr-1 text-success"></i> Thumbnail Image
+                                    </label>
+                                    <div id="thumbUploadBox" style="border:2px dashed #ced4da; border-radius:8px; padding:18px 14px; text-align:center; cursor:pointer; background:#fafafa; position:relative; transition:border-color 0.2s, background 0.2s;">
+                                        <input type="file" name="thumbnail" id="thumbInput" accept="image/*" required
+                                            style="position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;">
+                                        <i class="fa fa-cloud-upload-alt" style="font-size:26px; color:#adb5bd; display:block; margin-bottom:6px;"></i>
+                                        <div style="font-size:13px; color:#888;">Click or drag &amp; drop thumbnail here</div>
+                                        <div id="thumbFileName" style="font-size:13px; color:#28a745; font-weight:600; margin-top:4px;">No file chosen</div>
+                                    </div>
                                 </div>
 
+                                <!-- Video File Upload -->
                                 <div class="form-group">
-                                    <label>Video File</label>
-                                    <input type="file" name="video" class="form-control-file" required>
+                                    <label style="font-weight:600; font-size:13px; color:#444; text-transform:uppercase; letter-spacing:0.4px;">
+                                        <i class="fa fa-film mr-1 text-success"></i> Video File
+                                    </label>
+                                    <div id="videoUploadBox" style="border:2px dashed #ced4da; border-radius:8px; padding:18px 14px; text-align:center; cursor:pointer; background:#fafafa; position:relative; transition:border-color 0.2s, background 0.2s;">
+                                        <input type="file" name="video" id="videoInput" accept="video/*" required
+                                            style="position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;">
+                                        <i class="fa fa-video" style="font-size:26px; color:#adb5bd; display:block; margin-bottom:6px;"></i>
+                                        <div style="font-size:13px; color:#888;">Click or drag &amp; drop video file here</div>
+                                        <div id="videoFileName" style="font-size:13px; color:#28a745; font-weight:600; margin-top:4px;">No file chosen</div>
+                                    </div>
                                 </div>
 
-                                <button type="submit" name="save_video" class="btn btn-success btn-sm">
-                                    <i class="fa fa-upload"></i> Upload Video
-                                </button>
+                                <hr class="mt-4">
+
+                                <div class="d-flex justify-content-end" style="gap:10px;">
+                                    <button type="button" onclick="$('#videoSection').hide(); $('#studentsSection').show();"
+                                        style="border:1.5px solid #ced4da; background:#fff; color:#555; font-weight:600; padding:10px 24px; border-radius:8px; font-size:14px;">
+                                        Cancel
+                                    </button>
+                                    <button type="submit" name="save_video"
+                                        style="background:linear-gradient(135deg,#28a745,#20c997); border:none; color:#fff; font-weight:600; padding:10px 28px; border-radius:8px; font-size:14px;">
+                                        <i class="fa fa-upload mr-1"></i> Upload Video
+                                    </button>
+                                </div>
 
                             </form>
                         </div>
@@ -268,6 +304,28 @@ if (isset($_POST['save_video'])) {
                 else alert('Failed');
             });
         }
+    });
+
+    // File input preview — thumbnail
+    document.getElementById('thumbInput').addEventListener('change', function () {
+        const name = this.files[0] ? this.files[0].name : 'No file chosen';
+        document.getElementById('thumbFileName').textContent = name;
+        document.getElementById('thumbUploadBox').style.borderColor = this.files[0] ? '#28a745' : '#ced4da';
+        document.getElementById('thumbUploadBox').style.background  = this.files[0] ? '#f0fff4' : '#fafafa';
+    });
+
+    // File input preview — video
+    document.getElementById('videoInput').addEventListener('change', function () {
+        const name = this.files[0] ? this.files[0].name : 'No file chosen';
+        document.getElementById('videoFileName').textContent = name;
+        document.getElementById('videoUploadBox').style.borderColor = this.files[0] ? '#28a745' : '#ced4da';
+        document.getElementById('videoUploadBox').style.background  = this.files[0] ? '#f0fff4' : '#fafafa';
+    });
+
+    // Focus ring on form controls
+    document.querySelectorAll('#videoUploadForm .form-control').forEach(function(el) {
+        el.addEventListener('focus', function() { this.style.borderColor = '#28a745'; this.style.boxShadow = '0 0 0 3px rgba(40,167,69,0.12)'; });
+        el.addEventListener('blur',  function() { this.style.borderColor = '#dee2e6'; this.style.boxShadow = 'none'; });
     });
     </script>
 
