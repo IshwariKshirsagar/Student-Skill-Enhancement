@@ -116,6 +116,7 @@ include 'db_connect.php';
                                    class="btn btn-sm btn-primary">
                                     <i class="fa fa-file-pdf" style="font-size: 16px;"></i> View
                                 </a>
+
                             </td>
                         </tr>
                         <?php endwhile; ?>

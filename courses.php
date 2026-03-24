@@ -115,7 +115,7 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
                             <td class="text-center"><b><?= htmlspecialchars($row['owner_name']) ?></b></td>
                             <td class="text-center">
                                 <a href="./index.php?page=viewcourse&course_access=restricted&course_id=<?= $row['course_id'] ?>"
-                                    class="btn btn-sm btn-info">
+                                    class="btn btn-sm btn-primary">
                                     <i class="fa fa-eye" style="font-size:14px;"></i> View
                                 </a>
                             </td>

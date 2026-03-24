@@ -80,7 +80,7 @@ include 'db_connect.php';
                             <td class="text-center"><?php echo $row['project_price']; ?></td>
                             <td class="text-center">
                                 <a href="../projects/<?php echo $row['project_link']; ?>" 
-                                   class="btn btn-sm btn-success" 
+                                   class="btn btn-sm btn-primary" 
                                    download>
                                     <i class="fa fa-download" style="font-size:16px;"></i> Download
                                 </a>

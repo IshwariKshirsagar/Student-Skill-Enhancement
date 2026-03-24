@@ -92,12 +92,14 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
                                    class="btn btn-sm btn-primary">
                                     <i class="fa fa-eye" style="font-size:14px;"></i> View
                                 </a>
+
                             </td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-danger delete_course"
                                     data-id="<?= $row['course_id'] ?>">
                                     <i class="fa fa-trash" style="font-size:14px;"></i> Delete
                                 </button>
+
                             </td>
                         </tr>
                         <?php endwhile; ?>
