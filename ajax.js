@@ -25,37 +25,4 @@ $(document).ready(function () {
         });
     });
 
-    /* ENROLL COURSE */
-    $(document).on('click', '.enroll_course', function () {
-
-        let courseId = $(this).data('courseid');
-
-        if (!confirm('Enroll in this course?')) return;
-
-        $.ajax({
-            url: 'enroll_course.php',
-            type: 'POST',
-            data: { course_id: courseId },
-            success: function (response) {
-
-                response = response.trim();
-
-                if (response === '1') {
-                    alert('Successfully enrolled!');
-                    location.reload();
-                }
-                else if (response === '2') {
-                    alert('Already enrolled.');
-                }
-                else {
-                    alert('Enrollment failed.');
-                }
-            },
-            error: function () {
-                alert('AJAX request failed.');
-            }
-        });
-
-    });
-
 });

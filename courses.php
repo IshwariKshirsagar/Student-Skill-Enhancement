@@ -38,7 +38,7 @@ include 'db_connect.php';
 if ($_SESSION['login_user_type'] == 3) {
     $student_id = (int)$_SESSION['login_user_id'];
     $qry = $conn->query("
-        SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name
+        SELECT cd.course_id, cd.course_name, cd.course_price, ct.course_type_name, u.name AS owner_name
         FROM course_database cd
         JOIN course_type ct ON cd.course_type = ct.course_type_id
         JOIN users_database u ON cd.course_owner = u.user_id
@@ -52,7 +52,7 @@ if ($_SESSION['login_user_type'] == 3) {
             )";
 } elseif ($_SESSION['login_user_type'] == 1) {
     $qry = $conn->query("
-        SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name
+        SELECT cd.course_id, cd.course_name, cd.course_price, ct.course_type_name, u.name AS owner_name
         FROM course_database cd
         JOIN course_type ct ON cd.course_type = ct.course_type_id
         JOIN users_database u ON cd.course_owner = u.user_id
@@ -61,7 +61,7 @@ if ($_SESSION['login_user_type'] == 3) {
 } else {
     $owner_id = (int)$_SESSION['login_user_id'];
     $qry = $conn->query("
-        SELECT cd.course_id, cd.course_name, ct.course_type_name, u.name AS owner_name
+        SELECT cd.course_id, cd.course_name, cd.course_price, ct.course_type_name, u.name AS owner_name
         FROM course_database cd
         JOIN course_type ct ON cd.course_type = ct.course_type_id
         JOIN users_database u ON cd.course_owner = u.user_id
@@ -102,6 +102,7 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
                             <th class="text-center" onclick="sortTable(1)">Course Name</th>
                             <th class="text-center" onclick="sortTable(2)">Course Type</th>
                             <th class="text-center" onclick="sortTable(3)">Course Owner</th>
+                            <th class="text-center" onclick="sortTable(4)">Price (₹)</th>
                             <th class="text-center">View</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -113,6 +114,7 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
                             <td class="text-center"><b><?= htmlspecialchars($row['course_name']) ?></b></td>
                             <td class="text-center"><b><?= htmlspecialchars($row['course_type_name']) ?></b></td>
                             <td class="text-center"><b><?= htmlspecialchars($row['owner_name']) ?></b></td>
+                            <td class="text-center"><b>₹<?= number_format($row['course_price']) ?></b></td>
                             <td class="text-center">
                                 <a href="./index.php?page=viewcourse&course_access=restricted&course_id=<?= $row['course_id'] ?>"
                                     class="btn btn-sm btn-primary">
@@ -121,7 +123,10 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
                             </td>
                             <td class="text-center">
                                 <?php if ($_SESSION['login_user_type'] == 3): ?>
-                                <button class="btn btn-sm btn-success enroll_course" data-courseid="<?= $row['course_id'] ?>">
+                                <button class="btn btn-sm btn-success enroll_course"
+                                    data-courseid="<?= $row['course_id'] ?>"
+                                    data-coursename="<?= htmlspecialchars($row['course_name']) ?>"
+                                    data-price="<?= (int)$row['course_price'] ?>">
                                     <i class="fa fa-plus" style="font-size:14px;"></i> Enroll
                                 </button>
                                 <?php endif; ?>
@@ -139,6 +144,9 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
         </div>
     </div>
 </div>
+
+<!-- Razorpay Checkout SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
 // 🔍 Live Search
@@ -169,6 +177,81 @@ function sortTable(columnIndex) {
     rows.forEach(row => tbody.appendChild(row));
     table.setAttribute("data-sort", asc ? "asc" : "desc");
 }
+
+// 💳 Enroll with Razorpay Payment
+$(document).on('click', '.enroll_course', function () {
+    const courseId   = $(this).data('courseid');
+    const courseName = $(this).data('coursename');
+    const price      = parseInt($(this).data('price'));
+
+    if (!confirm('Enroll in "' + courseName + '" for ₹' + price + '?')) return;
+
+    // Step 1: Create Razorpay order on server
+    $.ajax({
+        url: 'operations/create_razorpay_order.php',
+        type: 'POST',
+        data: { course_id: courseId },
+        dataType: 'json',
+        success: function (order) {
+            if (order.error) {
+                alert('Error: ' + order.error);
+                return;
+            }
+
+            // Step 2: Open Razorpay checkout
+            const options = {
+                key:         order.key_id,
+                amount:      order.amount,
+                currency:    order.currency,
+                name:        'Student Skill Enhancement',
+                description: 'Enrollment: ' + order.course_name,
+                order_id:    order.order_id,
+                prefill: {
+                    name:    order.student_name,
+                    email:   order.student_email,
+                    contact: order.student_phone
+                },
+                theme: { color: '#28a745' },
+                handler: function (response) {
+                    // Step 3: Verify payment & enroll
+                    $.ajax({
+                        url: 'operations/verify_payment.php',
+                        type: 'POST',
+                        data: {
+                            razorpay_order_id:   response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature:  response.razorpay_signature,
+                            course_id:           courseId
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status === 'success') {
+                                alert('Payment successful! You are now enrolled.');
+                                location.reload();
+                            } else if (res.status === 'already_enrolled') {
+                                alert('You are already enrolled in this course.');
+                                location.reload();
+                            } else {
+                                alert('Payment received but enrollment failed. Contact support with Payment ID: ' + response.razorpay_payment_id);
+                            }
+                        }
+                    });
+                },
+                modal: {
+                    ondismiss: function () {
+                        alert('Payment cancelled.');
+                    }
+                }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        },
+        error: function () {
+            alert('Could not initiate payment. Please try again.');
+        }
+    });
+});
 </script>
 
 </body>
