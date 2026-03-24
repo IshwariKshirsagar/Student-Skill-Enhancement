@@ -47,7 +47,7 @@ $qry = $conn->query("
 
 <div class="container mt-4">
 <?php if ($course_access == "allowed"): ?>
-<a href="certificate.php?course_id=<?= $course_id ?>" 
+<a href="index.php?page=quiz&course_id=<?= $course_id ?>" 
    class="btn btn-sm btn-success mr-2"
    style="white-space:nowrap;">
    <i class="fa fa-certificate mr-1"></i> Download Certificate

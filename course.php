@@ -76,7 +76,7 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
                             <th class="text-center" onclick="sortTable(1)">Course Name</th>
                             <th class="text-center" onclick="sortTable(2)">Course Type</th>
                             <th class="text-center" onclick="sortTable(3)">Course Owner</th>
-                            <th class="text-center">View</th>
+                            <th class="text-center">Update</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -90,7 +90,7 @@ $totalCourses = $conn->query($sql)->fetch_assoc()['total_course'];
                             <td class="text-center">
                                 <a href="./index.php?page=studentsregistered&course_id=<?= $row['course_id'] ?>"
                                    class="btn btn-sm btn-primary">
-                                    <i class="fa fa-eye" style="font-size:14px;"></i> View
+                                    <i class="fa fa-edit" style="font-size:14px;"></i> Update
                                 </a>
 
                             </td>

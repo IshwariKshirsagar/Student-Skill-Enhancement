@@ -77,6 +77,9 @@ if (isset($_POST['save_video'])) {
                     <button class="btn btn-sm btn-info" id="showVideoList">
                         <i class="fa fa-play-circle"></i> Course Videos
                     </button>
+                    <button class="btn btn-sm btn-warning" id="showQuiz">
+                        <i class="fa fa-question-circle"></i> Quiz Questions
+                    </button>
                 </div>
 
                 <!-- ===========================
@@ -261,6 +264,146 @@ if (isset($_POST['save_video'])) {
                     <?php endif; ?>
                 </div>
 
+                <!-- ===========================
+                 QUIZ QUESTIONS SECTION
+                 =========================== -->
+                <div id="quizSection" style="display:none;">
+                    <?php
+                    // Handle add question
+                    if (isset($_POST['save_question'])) {
+                        $question  = mysqli_real_escape_string($conn, $_POST['question']);
+                        $option_a  = mysqli_real_escape_string($conn, $_POST['option_a']);
+                        $option_b  = mysqli_real_escape_string($conn, $_POST['option_b']);
+                        $option_c  = mysqli_real_escape_string($conn, $_POST['option_c']);
+                        $option_d  = mysqli_real_escape_string($conn, $_POST['option_d']);
+                        $correct   = mysqli_real_escape_string($conn, $_POST['correct_option']);
+                        $conn->query("INSERT INTO course_quiz (course_id, question, option_a, option_b, option_c, option_d, correct_option)
+                                      VALUES ($course_id, '$question', '$option_a', '$option_b', '$option_c', '$option_d', '$correct')");
+                        echo "<script>alert('Question added successfully!');</script>";
+                    }
+                    // Handle delete question
+                    if (isset($_POST['delete_question'])) {
+                        $del_id = (int)$_POST['delete_question'];
+                        $conn->query("DELETE FROM course_quiz WHERE id = $del_id AND course_id = $course_id");
+                    }
+
+                    $quiz_qry = $conn->query("SELECT * FROM course_quiz WHERE course_id = $course_id ORDER BY id ASC");
+                    $quiz_count = $quiz_qry->num_rows;
+                    ?>
+
+                    <!-- Add Question Form -->
+                    <div class="card mb-4" style="border:none; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.10); max-width:680px; margin:0 auto 24px;">
+                        <div class="card-header" style="background:linear-gradient(135deg,#ffc107,#fd7e14); border-radius:16px 16px 0 0; padding:20px 26px 16px; border:none;">
+                            <h5 style="color:#fff; font-weight:700; margin:0;"><i class="fa fa-plus-circle mr-2"></i> Add Quiz Question</h5>
+                            <p style="color:rgba(255,255,255,0.85); font-size:13px; margin:4px 0 0;">Add MCQ questions for the certificate quiz (need at least 10).</p>
+                        </div>
+                        <div class="card-body" style="padding:24px;">
+                            <form method="POST">
+                                <div class="form-group">
+                                    <label style="font-weight:600; font-size:13px; color:#444; text-transform:uppercase; letter-spacing:0.4px;">
+                                        <i class="fa fa-question mr-1 text-warning"></i> Question
+                                    </label>
+                                    <textarea name="question" class="form-control" rows="2" placeholder="Enter the question..." required
+                                        style="border:1.5px solid #dee2e6; border-radius:8px; font-size:14px; box-shadow:none;"></textarea>
+                                </div>
+                                <div class="row">
+                                    <?php foreach (['A','B','C','D'] as $opt): ?>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="font-weight:600; font-size:13px; color:#444; text-transform:uppercase; letter-spacing:0.4px;">
+                                                Option <?= $opt ?>
+                                            </label>
+                                            <input type="text" name="option_<?= strtolower($opt) ?>" class="form-control"
+                                                placeholder="Option <?= $opt ?>" required
+                                                style="border:1.5px solid #dee2e6; border-radius:8px; font-size:14px; box-shadow:none;">
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight:600; font-size:13px; color:#444; text-transform:uppercase; letter-spacing:0.4px;">
+                                        <i class="fa fa-check-circle mr-1 text-success"></i> Correct Answer
+                                    </label>
+                                    <select name="correct_option" class="form-control" required
+                                        style="border:1.5px solid #dee2e6; border-radius:8px; font-size:14px; box-shadow:none;">
+                                        <option value="">-- Select correct option --</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" name="save_question"
+                                        style="background:linear-gradient(135deg,#ffc107,#fd7e14); border:none; color:#fff; font-weight:600; padding:10px 28px; border-radius:8px; font-size:14px;">
+                                        <i class="fa fa-plus mr-1"></i> Add Question
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Existing Questions List -->
+                    <?php if ($quiz_count > 0): ?>
+                    <div class="card" style="border:none; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+                        <div class="card-header d-flex justify-content-between align-items-center" style="background:#f8f9fa; border-radius:12px 12px 0 0;">
+                            <h6 class="mb-0 font-weight-bold"><i class="fa fa-list mr-1 text-warning"></i> Existing Questions (<?= $quiz_count ?>)</h6>
+                            <?php if ($quiz_count < 10): ?>
+                            <span class="badge badge-warning" style="font-size:12px;">Need <?= 10 - $quiz_count ?> more for quiz</span>
+                            <?php else: ?>
+                            <span class="badge badge-success" style="font-size:12px;"><i class="fa fa-check mr-1"></i> Quiz Ready</span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-center" style="width:40px;">#</th>
+                                            <th>Question</th>
+                                            <th class="text-center">A</th>
+                                            <th class="text-center">B</th>
+                                            <th class="text-center">C</th>
+                                            <th class="text-center">D</th>
+                                            <th class="text-center">Answer</th>
+                                            <th class="text-center">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $qi = 1; while ($qrow = $quiz_qry->fetch_assoc()): ?>
+                                        <tr>
+                                            <td class="text-center"><?= $qi++ ?></td>
+                                            <td><?= htmlspecialchars($qrow['question']) ?></td>
+                                            <td class="text-center small"><?= htmlspecialchars($qrow['option_a']) ?></td>
+                                            <td class="text-center small"><?= htmlspecialchars($qrow['option_b']) ?></td>
+                                            <td class="text-center small"><?= htmlspecialchars($qrow['option_c']) ?></td>
+                                            <td class="text-center small"><?= htmlspecialchars($qrow['option_d']) ?></td>
+                                            <td class="text-center">
+                                                <span class="badge badge-success"><?= htmlspecialchars($qrow['correct_option']) ?></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <form method="POST" style="display:inline;" onsubmit="return confirm('Delete this question?');">
+                                                    <input type="hidden" name="delete_question" value="<?= $qrow['id'] ?>">
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <?php else: ?>
+                    <div class="text-center text-muted py-4">
+                        <i class="fa fa-question-circle fa-2x mb-2 d-block text-warning"></i>
+                        No questions added yet. Add at least 10 questions for the quiz.
+                    </div>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </div>
     </div>
@@ -280,18 +423,28 @@ if (isset($_POST['save_video'])) {
         $('#studentsSection').show();
         $('#videoSection').hide();
         $('#videoListSection').hide();
+        $('#quizSection').hide();
     });
 
     $('#showVideos').click(function() {
         $('#studentsSection').hide();
         $('#videoSection').show();
         $('#videoListSection').hide();
+        $('#quizSection').hide();
     });
 
     $('#showVideoList').click(function() {
         $('#studentsSection').hide();
         $('#videoSection').hide();
         $('#videoListSection').show();
+        $('#quizSection').hide();
+    });
+
+    $('#showQuiz').click(function() {
+        $('#studentsSection').hide();
+        $('#videoSection').hide();
+        $('#videoListSection').hide();
+        $('#quizSection').show();
     });
 
     $(document).on('click', '.remove_user', function() {
