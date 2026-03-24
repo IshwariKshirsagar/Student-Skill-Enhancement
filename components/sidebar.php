@@ -86,6 +86,14 @@ $current_page = $_GET['page'] ?? 'home';
     </a>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link <?= ($current_page == 'add_project') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="index.php?page=add_project">
+        <i class="material-symbols-rounded opacity-5">upload_file</i>
+        <span class="nav-link-text ms-1">Add Project</span>
+    </a>
+</li>
+
             <?php if($_SESSION['login_user_type'] == 1 || $_SESSION['login_user_type'] == 2): ?>
 
             <li class="nav-item">

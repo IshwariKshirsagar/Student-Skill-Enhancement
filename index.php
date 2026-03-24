@@ -88,7 +88,7 @@ th.sort-desc::after {
         ?>
         
     </main>
-    <?php include 'components/settings.php' ?>
+    <?php // include 'components/settings.php' ?>
 
 
     <!--   Core JS Files   -->
