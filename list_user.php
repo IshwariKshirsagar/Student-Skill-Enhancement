@@ -17,17 +17,31 @@
 
     <!-- Bootstrap CSS (Optional for better styling) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <style>
+        #searchInput {
+            border: 1px solid #666;
+            border-radius: 4px;
+            padding: 6px 10px;
+        }
+        #searchInput:focus {
+            border-color: #000;
+            box-shadow: none;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
 
 <div class="col-lg-12">
     <div class="card card-outline card-success">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <div class="card-tools">
                 <a class="btn btn-block btn-sm btn-primary btn-flat" href="./index.php?page=new_user">
                     <i class="fa fa-plus"></i> Add New User
                 </a>
             </div>
+            <input type="text" id="searchInput" class="form-control form-control-sm w-25" placeholder="Search users...">
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -113,23 +127,33 @@ function delete_user(userId) {
 // Sorting functionality
 function sortTable(columnIndex) {
     const table = document.getElementById("sortableTable");
-    const rows = Array.from(table.rows).slice(1); // Exclude the header row
-    const isAscending = table.getAttribute(`data-sort-${columnIndex}`) !== "asc";
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+    const asc = table.getAttribute("data-sort") !== "asc";
 
     rows.sort((a, b) => {
-        const cellA = a.cells[columnIndex].innerText.trim().toLowerCase();
-        const cellB = b.cells[columnIndex].innerText.trim().toLowerCase();
+        let x = a.cells[columnIndex].innerText.trim();
+        let y = b.cells[columnIndex].innerText.trim();
 
-        if (cellA < cellB) return isAscending ? -1 : 1;
-        if (cellA > cellB) return isAscending ? 1 : -1;
-        return 0;
+        if (!isNaN(x) && !isNaN(y)) {
+            return asc ? x - y : y - x;
+        }
+        return asc ? x.localeCompare(y) : y.localeCompare(x);
     });
 
-    rows.forEach(row => table.tBodies[0].appendChild(row));
-
-    // Toggle sort direction
-    table.setAttribute(`data-sort-${columnIndex}`, isAscending ? "asc" : "desc");
+    rows.forEach(row => tbody.appendChild(row));
+    table.setAttribute("data-sort", asc ? "asc" : "desc");
 }
+
+// 🔍 Live Search
+$(document).ready(function () {
+    $("#searchInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#sortableTable tbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+});
 </script>
 
 </body>
