@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2026 at 06:38 PM
+-- Generation Time: Mar 24, 2026 at 03:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -68,6 +68,7 @@ CREATE TABLE `course_database` (
   `course_name` varchar(200) NOT NULL,
   `course_type` int(11) NOT NULL,
   `course_owner` int(11) NOT NULL,
+  `course_price` int(11) NOT NULL DEFAULT 1,
   `course_date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -75,74 +76,74 @@ CREATE TABLE `course_database` (
 -- Dumping data for table `course_database`
 --
 
-INSERT INTO `course_database` (`course_id`, `course_name`, `course_type`, `course_owner`, `course_date_created`) VALUES
-(1, 'Java Programming', 1, 6, '2025-12-15 07:51:26'),
-(2, 'Python Programming', 1, 17, '2025-12-15 08:19:16'),
-(3, 'Android Programming', 5, 19, '2025-12-15 08:20:40'),
-(4, 'Elements of Electrical Engineering', 2, 16, '2025-12-15 08:33:52'),
-(5, 'Thermodynamics', 6, 22, '2025-12-15 09:54:17'),
-(6, 'PHP', 1, 17, '2025-12-16 03:50:02'),
-(11, 'Javascript', 1, 4, '2026-03-12 17:32:12'),
-(12, 'Javascript Fundamentals', 1, 16, '2026-03-12 17:35:03'),
-(13, 'Advanced Javascript', 1, 4, '2026-03-12 17:35:03'),
-(14, 'HTML Complete Guide', 1, 17, '2026-03-12 17:35:03'),
-(15, 'CSS Masterclass', 1, 22, '2026-03-12 17:35:03'),
-(16, 'React Development', 1, 6, '2026-03-12 17:35:03'),
-(17, 'NodeJS Backend Development', 1, 16, '2026-03-12 17:35:03'),
-(18, 'PHP Web Development', 1, 4, '2026-03-12 17:35:03'),
-(19, 'Full Stack Web Development', 1, 17, '2026-03-12 17:35:03'),
-(20, 'Frontend Engineering', 1, 4, '2026-03-12 17:35:03'),
-(21, 'Web Performance Optimization', 1, 4, '2026-03-12 17:35:03'),
-(22, 'Python Programming', 2, 4, '2026-03-12 17:35:43'),
-(23, 'Java Programming', 2, 6, '2026-03-12 17:35:43'),
-(24, 'C Programming', 2, 19, '2026-03-12 17:35:43'),
-(25, 'C++ Programming', 2, 6, '2026-03-12 17:35:43'),
-(26, 'Data Structures', 2, 19, '2026-03-12 17:35:43'),
-(27, 'Algorithms Design', 2, 17, '2026-03-12 17:35:43'),
-(28, 'Object Oriented Programming', 2, 17, '2026-03-12 17:35:43'),
-(29, 'Software Engineering', 2, 6, '2026-03-12 17:35:43'),
-(30, 'Operating Systems', 2, 16, '2026-03-12 17:35:43'),
-(31, 'Computer Architecture', 2, 17, '2026-03-12 17:35:43'),
-(32, 'Database Fundamentals', 3, 16, '2026-03-12 17:35:55'),
-(33, 'MySQL Database', 3, 17, '2026-03-12 17:35:55'),
-(34, 'PostgreSQL Administration', 3, 19, '2026-03-12 17:35:55'),
-(35, 'MongoDB Development', 3, 16, '2026-03-12 17:35:55'),
-(36, 'NoSQL Databases', 3, 22, '2026-03-12 17:35:55'),
-(37, 'SQL Optimization', 3, 19, '2026-03-12 17:35:56'),
-(38, 'Database Security', 3, 19, '2026-03-12 17:35:56'),
-(39, 'Data Warehousing', 3, 17, '2026-03-12 17:35:56'),
-(40, 'Big Data Storage', 3, 19, '2026-03-12 17:35:56'),
-(41, 'Database Design', 3, 6, '2026-03-12 17:35:56'),
-(42, 'Machine Learning Basics', 4, 6, '2026-03-12 17:36:08'),
-(43, 'Deep Learning', 4, 4, '2026-03-12 17:36:08'),
-(44, 'Artificial Intelligence', 4, 6, '2026-03-12 17:36:08'),
-(45, 'Data Science', 4, 16, '2026-03-12 17:36:08'),
-(46, 'Natural Language Processing', 4, 22, '2026-03-12 17:36:08'),
-(47, 'Computer Vision', 4, 4, '2026-03-12 17:36:08'),
-(48, 'Neural Networks', 4, 19, '2026-03-12 17:36:08'),
-(49, 'AI Model Deployment', 4, 6, '2026-03-12 17:36:08'),
-(50, 'Reinforcement Learning', 4, 17, '2026-03-12 17:36:08'),
-(51, 'AI Ethics', 4, 19, '2026-03-12 17:36:08'),
-(52, 'Cyber Security Basics', 5, 17, '2026-03-12 17:36:26'),
-(53, 'Ethical Hacking', 5, 19, '2026-03-12 17:36:26'),
-(54, 'Network Security', 5, 16, '2026-03-12 17:36:26'),
-(55, 'Digital Forensics', 5, 19, '2026-03-12 17:36:26'),
-(56, 'Penetration Testing', 5, 17, '2026-03-12 17:36:26'),
-(57, 'Malware Analysis', 5, 4, '2026-03-12 17:36:26'),
-(58, 'Cloud Security', 5, 17, '2026-03-12 17:36:26'),
-(59, 'Application Security', 5, 19, '2026-03-12 17:36:26'),
-(60, 'Security Operations', 5, 22, '2026-03-12 17:36:26'),
-(61, 'Information Security Management', 5, 17, '2026-03-12 17:36:26'),
-(62, 'Cloud Computing', 6, 4, '2026-03-12 17:36:51'),
-(63, 'AWS Cloud Practitioner', 6, 17, '2026-03-12 17:36:51'),
-(64, 'Azure Fundamentals', 6, 4, '2026-03-12 17:36:51'),
-(65, 'Google Cloud Platform', 6, 17, '2026-03-12 17:36:51'),
-(66, 'Docker Containers', 6, 6, '2026-03-12 17:36:51'),
-(67, 'Kubernetes Deployment', 6, 4, '2026-03-12 17:36:51'),
-(68, 'DevOps Engineering', 6, 19, '2026-03-12 17:36:51'),
-(69, 'CI CD Pipelines', 6, 6, '2026-03-12 17:36:51'),
-(70, 'Infrastructure as Code', 6, 19, '2026-03-12 17:36:51'),
-(71, 'Site Reliability Engineering', 6, 22, '2026-03-12 17:36:51');
+INSERT INTO `course_database` (`course_id`, `course_name`, `course_type`, `course_owner`, `course_price`, `course_date_created`) VALUES
+(1, 'Java Programming', 1, 6, 5, '2025-12-15 07:51:26'),
+(2, 'Python Programming', 1, 17, 5, '2025-12-15 08:19:16'),
+(3, 'Android Programming', 5, 19, 5, '2025-12-15 08:20:40'),
+(4, 'Elements of Electrical Engineering', 2, 16, 5, '2025-12-15 08:33:52'),
+(5, 'Thermodynamics', 6, 22, 5, '2025-12-15 09:54:17'),
+(6, 'PHP', 1, 17, 5, '2025-12-16 03:50:02'),
+(11, 'Javascript', 1, 4, 5, '2026-03-12 17:32:12'),
+(12, 'Javascript Fundamentals', 1, 16, 5, '2026-03-12 17:35:03'),
+(13, 'Advanced Javascript', 1, 4, 5, '2026-03-12 17:35:03'),
+(14, 'HTML Complete Guide', 1, 17, 5, '2026-03-12 17:35:03'),
+(15, 'CSS Masterclass', 1, 22, 5, '2026-03-12 17:35:03'),
+(16, 'React Development', 1, 6, 5, '2026-03-12 17:35:03'),
+(17, 'NodeJS Backend Development', 1, 16, 5, '2026-03-12 17:35:03'),
+(18, 'PHP Web Development', 1, 4, 5, '2026-03-12 17:35:03'),
+(19, 'Full Stack Web Development', 1, 17, 5, '2026-03-12 17:35:03'),
+(20, 'Frontend Engineering', 1, 4, 5, '2026-03-12 17:35:03'),
+(21, 'Web Performance Optimization', 1, 4, 5, '2026-03-12 17:35:03'),
+(22, 'Python Programming', 2, 4, 5, '2026-03-12 17:35:43'),
+(23, 'Java Programming', 2, 6, 5, '2026-03-12 17:35:43'),
+(24, 'C Programming', 2, 19, 5, '2026-03-12 17:35:43'),
+(25, 'C++ Programming', 2, 6, 5, '2026-03-12 17:35:43'),
+(26, 'Data Structures', 2, 19, 5, '2026-03-12 17:35:43'),
+(27, 'Algorithms Design', 2, 17, 5, '2026-03-12 17:35:43'),
+(28, 'Object Oriented Programming', 2, 17, 5, '2026-03-12 17:35:43'),
+(29, 'Software Engineering', 2, 6, 5, '2026-03-12 17:35:43'),
+(30, 'Operating Systems', 2, 16, 5, '2026-03-12 17:35:43'),
+(31, 'Computer Architecture', 2, 17, 5, '2026-03-12 17:35:43'),
+(32, 'Database Fundamentals', 3, 16, 5, '2026-03-12 17:35:55'),
+(33, 'MySQL Database', 3, 17, 5, '2026-03-12 17:35:55'),
+(34, 'PostgreSQL Administration', 3, 19, 5, '2026-03-12 17:35:55'),
+(35, 'MongoDB Development', 3, 16, 5, '2026-03-12 17:35:55'),
+(36, 'NoSQL Databases', 3, 22, 5, '2026-03-12 17:35:55'),
+(37, 'SQL Optimization', 3, 19, 5, '2026-03-12 17:35:56'),
+(38, 'Database Security', 3, 19, 5, '2026-03-12 17:35:56'),
+(39, 'Data Warehousing', 3, 17, 5, '2026-03-12 17:35:56'),
+(40, 'Big Data Storage', 3, 19, 5, '2026-03-12 17:35:56'),
+(41, 'Database Design', 3, 6, 5, '2026-03-12 17:35:56'),
+(42, 'Machine Learning Basics', 4, 6, 5, '2026-03-12 17:36:08'),
+(43, 'Deep Learning', 4, 4, 5, '2026-03-12 17:36:08'),
+(44, 'Artificial Intelligence', 4, 6, 5, '2026-03-12 17:36:08'),
+(45, 'Data Science', 4, 16, 5, '2026-03-12 17:36:08'),
+(46, 'Natural Language Processing', 4, 22, 5, '2026-03-12 17:36:08'),
+(47, 'Computer Vision', 4, 4, 5, '2026-03-12 17:36:08'),
+(48, 'Neural Networks', 4, 19, 5, '2026-03-12 17:36:08'),
+(49, 'AI Model Deployment', 4, 6, 5, '2026-03-12 17:36:08'),
+(50, 'Reinforcement Learning', 4, 17, 5, '2026-03-12 17:36:08'),
+(51, 'AI Ethics', 4, 19, 5, '2026-03-12 17:36:08'),
+(52, 'Cyber Security Basics', 5, 17, 5, '2026-03-12 17:36:26'),
+(53, 'Ethical Hacking', 5, 19, 5, '2026-03-12 17:36:26'),
+(54, 'Network Security', 5, 16, 5, '2026-03-12 17:36:26'),
+(55, 'Digital Forensics', 5, 19, 5, '2026-03-12 17:36:26'),
+(56, 'Penetration Testing', 5, 17, 5, '2026-03-12 17:36:26'),
+(57, 'Malware Analysis', 5, 4, 5, '2026-03-12 17:36:26'),
+(58, 'Cloud Security', 5, 17, 5, '2026-03-12 17:36:26'),
+(59, 'Application Security', 5, 19, 5, '2026-03-12 17:36:26'),
+(60, 'Security Operations', 5, 22, 5, '2026-03-12 17:36:26'),
+(61, 'Information Security Management', 5, 17, 5, '2026-03-12 17:36:26'),
+(62, 'Cloud Computing', 6, 4, 5, '2026-03-12 17:36:51'),
+(63, 'AWS Cloud Practitioner', 6, 17, 5, '2026-03-12 17:36:51'),
+(64, 'Azure Fundamentals', 6, 4, 5, '2026-03-12 17:36:51'),
+(65, 'Google Cloud Platform', 6, 17, 5, '2026-03-12 17:36:51'),
+(66, 'Docker Containers', 6, 6, 5, '2026-03-12 17:36:51'),
+(67, 'Kubernetes Deployment', 6, 4, 5, '2026-03-12 17:36:51'),
+(68, 'DevOps Engineering', 6, 19, 5, '2026-03-12 17:36:51'),
+(69, 'CI CD Pipelines', 6, 6, 5, '2026-03-12 17:36:51'),
+(70, 'Infrastructure as Code', 6, 19, 5, '2026-03-12 17:36:51'),
+(71, 'Site Reliability Engineering', 6, 22, 5, '2026-03-12 17:36:51');
 
 -- --------------------------------------------------------
 
@@ -222,9 +223,8 @@ CREATE TABLE `notes` (
 --
 
 INSERT INTO `notes` (`notes_id`, `notes_owner_id`, `notes_name`, `notes_price`, `notes_pdf_link`) VALUES
-(1, 1, 'Java Notes', 500, '../notes/Data.pdf'),
-(2, 26, 'Android Programming', 300, '../notes/Data.pdf'),
-(3, 5, 'Note1', 400, '1773227678_chapter-1-introduction.pdf');
+(4, 1, 'Android Programming', 1, '../notes/1774349237_Unit-01-Android OS and Programming-S.pdf'),
+(5, 5, 'Design and Analysis of Algorithms', 2, '../notes/1774356224_Mam Notes DAA Chapter 1.pdf');
 
 -- --------------------------------------------------------
 
@@ -245,8 +245,9 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`project_id`, `project_name`, `project_language`, `project_price`, `project_link`) VALUES
-(1, 'Library Management System', 'JAVA', 5000, '../projects/Data.zip'),
-(2, 'Student Skill Enhancement ', 'HTML,CSS,JS,PHP,BOOTSTRAP', 7000, '../projects/Data.zip');
+(3, 'Kaun Banega Corepati', 'Python', 5, '../projects/1774359106_kaun-banega-crorepati-main.zip'),
+(4, 'Quarantine Project', 'Python', 10, '../projects/1774359260_Python-Quarantine-Projects-master.zip'),
+(5, 'Self Driving Car', 'Python', 4000, '../projects/1774359312_SelfDriving-Car_Deep-Learning-master.zip');
 
 -- --------------------------------------------------------
 
@@ -266,9 +267,7 @@ CREATE TABLE `studentcourseregistered` (
 
 INSERT INTO `studentcourseregistered` (`id`, `course_id`, `user_id`) VALUES
 (2, 1, 5),
-(4, 4, 26),
-(5, 2, 5),
-(8, 6, 5);
+(4, 4, 26);
 
 -- --------------------------------------------------------
 
@@ -287,8 +286,7 @@ CREATE TABLE `studentnotesregistered` (
 --
 
 INSERT INTO `studentnotesregistered` (`id`, `notes_id`, `student_id`) VALUES
-(1, 2, 5),
-(2, 1, 5);
+(4, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -301,13 +299,6 @@ CREATE TABLE `studentprojectregistered` (
   `student_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `studentprojectregistered`
---
-
-INSERT INTO `studentprojectregistered` (`id`, `student_id`, `project_id`) VALUES
-(1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -486,31 +477,31 @@ ALTER TABLE `course_videos`
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `studentcourseregistered`
 --
 ALTER TABLE `studentcourseregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `studentnotesregistered`
 --
 ALTER TABLE `studentnotesregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `studentprojectregistered`
 --
 ALTER TABLE `studentprojectregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
