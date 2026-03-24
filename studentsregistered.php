@@ -74,6 +74,9 @@ if (isset($_POST['save_video'])) {
                     <button class="btn btn-sm btn-primary" id="showVideos">
                         <i class="fa fa-video"></i> Add Videos
                     </button>
+                    <button class="btn btn-sm btn-info" id="showVideoList">
+                        <i class="fa fa-play-circle"></i> Course Videos
+                    </button>
                 </div>
 
                 <!-- ===========================
@@ -180,6 +183,48 @@ if (isset($_POST['save_video'])) {
                     </div>
                 </div>
 
+                <!-- ===========================
+             COURSE VIDEOS LIST SECTION
+             =========================== -->
+                <div id="videoListSection" style="display:none;">
+                    <?php
+                    $videos_qry = $conn->query("
+                        SELECT * FROM course_videos WHERE course_id = $course_id ORDER BY id ASC
+                    ");
+                    if ($videos_qry->num_rows > 0):
+                    ?>
+                    <div class="row">
+                        <?php while ($vid = $videos_qry->fetch_assoc()): ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <img src="<?php echo htmlspecialchars($vid['Thumbnail']); ?>"
+                                     class="card-img-top"
+                                     alt="<?php echo htmlspecialchars($vid['VideoTitle']); ?>"
+                                     style="height:180px; object-fit:cover;">
+                                <div class="card-body d-flex flex-column">
+                                    <h6 class="card-title font-weight-bold mb-1">
+                                        <?php echo htmlspecialchars($vid['VideoTitle']); ?>
+                                    </h6>
+                                    <p class="card-text text-muted small flex-grow-1" style="overflow:hidden; max-height:60px;">
+                                        <?php echo htmlspecialchars($vid['Description']); ?>
+                                    </p>
+                                    <a href="./index.php?page=playvideo&id=<?php echo $vid['id']; ?>&course_id=<?php echo $course_id; ?>"
+                                       class="btn btn-sm btn-primary mt-2">
+                                        <i class="fa fa-play mr-1"></i> Watch
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endwhile; ?>
+                    </div>
+                    <?php else: ?>
+                    <div class="text-center text-muted py-4">
+                        <i class="fa fa-video fa-2x mb-2 d-block"></i>
+                        No videos uploaded yet for this course.
+                    </div>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </div>
     </div>
@@ -198,11 +243,19 @@ if (isset($_POST['save_video'])) {
     $('#showStudents').click(function() {
         $('#studentsSection').show();
         $('#videoSection').hide();
+        $('#videoListSection').hide();
     });
 
     $('#showVideos').click(function() {
         $('#studentsSection').hide();
         $('#videoSection').show();
+        $('#videoListSection').hide();
+    });
+
+    $('#showVideoList').click(function() {
+        $('#studentsSection').hide();
+        $('#videoSection').hide();
+        $('#videoListSection').show();
     });
 
     $(document).on('click', '.remove_user', function() {

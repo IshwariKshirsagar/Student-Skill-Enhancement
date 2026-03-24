@@ -127,6 +127,11 @@
                         <i class="material-symbols-rounded">account_circle</i>
                     </a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link text-dark" href="logout.php">
+                    <i class="material-symbols-rounded opacity-5">logout</i>
+                </a>
+            </li>
             </ul>
         </div>
     </div>
