@@ -2,6 +2,6 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "StudentSkillEnhancement";
-    $conn = new mysqli($servername, $username, $password, $database);
+    $database = "studentskillenhancement";
+    $conn = new mysqli($servername, $username, $password, $database,4306);
 ?>
