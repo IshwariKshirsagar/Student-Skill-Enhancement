@@ -1,8 +1,9 @@
 <?php
 include 'db_connect.php';
 
-$video_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$video_id  = isset($_GET['id'])        ? (int)$_GET['id']        : 0;
 $course_id = isset($_GET['course_id']) ? (int)$_GET['course_id'] : 0;
+$user_id   = isset($_SESSION['login_user_id']) ? (int)$_SESSION['login_user_id'] : 0;
 
 $qry = $conn->query("
     SELECT * 
@@ -16,8 +17,13 @@ if ($qry->num_rows == 0) {
 
 $video = $qry->fetch_assoc();
 
-/* OPTIONAL: Mark video as watched */
-$conn->query("UPDATE course_videos SET Status = 1 WHERE id = $video_id");
+/* Mark video as watched — insert into per-student watch table (ignore if already exists) */
+if ($user_id > 0) {
+    $conn->query("
+        INSERT IGNORE INTO student_video_watch (user_id, course_id, video_id)
+        VALUES ($user_id, $course_id, $video_id)
+    ");
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +48,7 @@ $conn->query("UPDATE course_videos SET Status = 1 WHERE id = $video_id");
 
     <div class="container mt-4">
 
-        <a href="./index.php?page=viewcourse&course_id=<?= $course_id ?>" class="btn btn-sm btn-secondary mb-3">
+        <a href="./index.php?page=viewcourse&course_access=allowed&course_id=<?= $course_id ?>" class="btn btn-sm btn-secondary mb-3">
             ← Back to Videos
         </a>
 

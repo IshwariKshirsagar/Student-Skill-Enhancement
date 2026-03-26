@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 24, 2026 at 06:16 PM
+-- Host: 127.0.0.1:4306
+-- Generation Time: Mar 26, 2026 at 09:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -678,7 +678,22 @@ CREATE TABLE `student_quiz_pass` (
 --
 
 INSERT INTO `student_quiz_pass` (`id`, `student_id`, `course_id`, `passed_at`) VALUES
-(1, 5, 11, '2026-03-24 22:21:46');
+(1, 5, 11, '2026-03-24 22:21:46'),
+(2, 5, 1, '2026-03-27 01:44:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_video_watch`
+--
+
+CREATE TABLE `student_video_watch` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `video_id` int(11) NOT NULL,
+  `watched_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -828,6 +843,16 @@ ALTER TABLE `student_quiz_pass`
   ADD UNIQUE KEY `student_course` (`student_id`,`course_id`);
 
 --
+-- Indexes for table `student_video_watch`
+--
+ALTER TABLE `student_video_watch`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_watch` (`user_id`,`video_id`),
+  ADD KEY `fk_user` (`user_id`),
+  ADD KEY `fk_course` (`course_id`),
+  ADD KEY `fk_video` (`video_id`);
+
+--
 -- Indexes for table `system_settings`
 --
 ALTER TABLE `system_settings`
@@ -907,6 +932,12 @@ ALTER TABLE `studentprojectregistered`
 -- AUTO_INCREMENT for table `student_quiz_pass`
 --
 ALTER TABLE `student_quiz_pass`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `student_video_watch`
+--
+ALTER TABLE `student_video_watch`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -970,6 +1001,14 @@ ALTER TABLE `studentnotesregistered`
 ALTER TABLE `studentprojectregistered`
   ADD CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `users_database` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `student_video_watch`
+--
+ALTER TABLE `student_video_watch`
+  ADD CONSTRAINT `fk_svw_course` FOREIGN KEY (`course_id`) REFERENCES `course_database` (`course_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_svw_user` FOREIGN KEY (`user_id`) REFERENCES `users_database` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_svw_video` FOREIGN KEY (`video_id`) REFERENCES `course_videos` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
