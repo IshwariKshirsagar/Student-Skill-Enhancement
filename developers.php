@@ -41,7 +41,7 @@
         <h2>Kshirsagar Ishwari</h2>
         <div class="social-links">
           <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
-          <a href="https://github.com/IshwariKshirsagar" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="" target="_blank"><i class="fab fa-github"></i></a>
           <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
           <a href="https://www.linkedin.com/in/ishwari-kshirsagar-1104b233a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
           <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
