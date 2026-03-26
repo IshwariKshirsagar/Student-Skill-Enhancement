@@ -40,11 +40,11 @@
         <img src="./assets/developer/image.png" alt="Developer Photo" class="developer-photo">
         <h2>Kshirsagar Ishwari</h2>
         <div class="social-links">
-          <a href="https://www.facebook.com/kshirsagar.yogesh.7" target="_blank"><i class="fab fa-facebook"></i></a>
-          <a href="https://github.com/YoKshirsagar" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://www.instagram.com/yogeshkshirsagar_0001?igsh=MWtkN3E3ZHd6N215NA==" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/yogesh-kshirsagar-838a2428b/" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="https://twitter.com/PSarsekar" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="https://github.com/IshwariKshirsagar" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/ishwari-kshirsagar-1104b233a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
@@ -53,11 +53,11 @@
          <img src="./assets/developer/image.png" alt="Developer Photo" class="developer-photo">
         <h2>Amruta Patil</h2>
         <div class="social-links">
-          <a href="https://www.facebook.com/kshirsagar.yogesh.7" target="_blank"><i class="fab fa-facebook"></i></a>
-          <a href="https://github.com/YoKshirsagar" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://www.instagram.com/yogeshkshirsagar_0001?igsh=MWtkN3E3ZHd6N215NA==" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/yogesh-kshirsagar-838a2428b/" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="https://twitter.com/PSarsekar" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
@@ -68,11 +68,11 @@
          <img src="./assets/developer/image.png" alt="Developer Photo" class="developer-photo">
         <h2>Ashwashradha Pawar</h2>
         <div class="social-links">
-          <a href="https://www.facebook.com/kshirsagar.yogesh.7" target="_blank"><i class="fab fa-facebook"></i></a>
-          <a href="https://github.com/YoKshirsagar" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://www.instagram.com/yogeshkshirsagar_0001?igsh=MWtkN3E3ZHd6N215NA==" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/yogesh-kshirsagar-838a2428b/" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="https://twitter.com/PSarsekar" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
@@ -81,11 +81,11 @@
          <img src="./assets/developer/image.png" alt="Developer Photo" class="developer-photo">
         <h2>Ashwsandhya Pawar</h2>
         <div class="social-links">
-          <a href="https://www.facebook.com/kshirsagar.yogesh.7" target="_blank"><i class="fab fa-facebook"></i></a>
-          <a href="https://github.com/YoKshirsagar" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="https://www.instagram.com/yogeshkshirsagar_0001?igsh=MWtkN3E3ZHd6N215NA==" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/yogesh-kshirsagar-838a2428b/" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="https://twitter.com/PSarsekar" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
